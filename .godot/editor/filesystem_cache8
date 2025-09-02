@@ -1,0 +1,6 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1734101251
+game.tscn::PackedScene::1722797288393350849::1734101231::0::1::::<><>::uid://bf72vuvnbi6no::::res://tilemap_packed.png<>res://Player.gd
+icon.svg::CompressedTexture2D::7293824694291209509::1734101231::1734101252::1::::<><>::
+Player.gd::GDScript::-1::1734101231::0::1::::<>Node2D<>::
+tilemap_packed.png::CompressedTexture2D::2805102933990116340::1734101231::1734101252::1::::<><>::
