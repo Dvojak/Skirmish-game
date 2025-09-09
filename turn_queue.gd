@@ -8,6 +8,8 @@ var numc_player = 0
 func setup():
 	Players = [$Player1, $Player2]
 	start_round()
+func _ready():
+	unit.connect("No actíons left",self,"next_player")	
 	
 func start_round():
 	for p in Players:
