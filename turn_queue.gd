@@ -63,6 +63,7 @@ func _input(event):
 
 		if path.size() > selected_unit.movement_points:
 			path = path.slice(0, selected_unit.movement_points)
+			
 
 		# převedeme na souřadnice v herním světě
 		var world_path: Array[Vector2] = []
