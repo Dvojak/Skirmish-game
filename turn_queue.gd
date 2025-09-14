@@ -4,6 +4,8 @@ class_name TurnManager
 
 @onready var unit = $player/unit
 @onready var tile_map =  $"../TileMap"
+var astar_grid: AStarGrid2D
+var current_id_path: Array[Vector2i]
 
 var Players = []
 var numc_player = 0
@@ -14,6 +16,13 @@ func setup():
 	start_round()
 func _ready():
 	unit.connect("no_actions_left",Callable(self, "_on_finished_action"))	
+	astar_grid = AStarGrid2D.new()
+	astar_grid.region = tile_map.get_used_rect()
+	astar_grid.cell_size = Vector2(16 ,16)
+	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	astar_grid.update()
+	
+	position = tile_map.map_to_local(tile_map.local_to_map(global_position))
 	
 func start_round():
 	for p in Players:
@@ -45,15 +54,23 @@ func _on_finished_action():
 	end_turn()	
 
 func _input(event):
-	if event.is_action_pressed("select_unit"):
-		var clicked_unit = _get_unit_under_mouse()
-		if clicked_unit:
-			selected_unit = clicked_unit
-			print("Vybral jsi:", selected_unit.name)
-	elif event.is_action_pressed("move") and selected_unit:
+	if event.is_action_pressed("move") and selected_unit:
 		var target_tile = _get_tile_under_mouse()
-		selected_unit.move_to(target_tile)
-		
+		var path = astar_grid.get_id_path(
+			tile_map.local_to_map(selected_unit.global_position),
+			tile_map.local_to_map(target_tile)
+		).slice(1)
+
+		if path.size() > selected_unit.movement_points:
+			path = path.slice(0, selected_unit.movement_points)
+
+		# převedeme na souřadnice v herním světě
+		var world_path: Array[Vector2] = []
+		for p in path:
+			world_path.append(tile_map.map_to_local(p))
+
+		selected_unit.move_along_path(world_path)
+
 		
 func end_turn():
 	numc_player = ( numc_player + 1) % Players.size()
