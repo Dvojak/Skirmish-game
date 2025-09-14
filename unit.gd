@@ -1,5 +1,6 @@
 
 extends Node2D
+class_name Unit
 
 @onready var tile_map =  $"../TileMap"
 
@@ -9,6 +10,7 @@ var current_id_path: Array[Vector2i]
 var activated = false
 var actions = 2
 var movement_points = 5
+signal no_actions_left
 
 func _ready():
 	astar_grid = AStarGrid2D.new()
@@ -40,25 +42,9 @@ func activate():
 	activated = true
 	actions = 2
 
-func _input(event):
-	if activated:
-		if actions != 0:
-			if event.is_action_pressed("move") == false:
-				return 
-	
-			var id_path = astar_grid.get_id_path(
-				tile_map.local_to_map(global_position),
-				tile_map.local_to_map(get_global_mouse_position())
-				).slice(1)
-	
-			if id_path.is_empty()  == false:
-				current_id_path = id_path
-				actions = actions - 1
-		
-		
 func move_to(target_tile: Vector2):
-		if actions == 0:
-			emit_signal("No actions left")
+		if current_id_path.is_empty() and actions == 0:
+			emit_signal("no_actions_left")
 			return
 		var id_path = astar_grid.get_id_path(
 			tile_map.local_to_map(global_position),
