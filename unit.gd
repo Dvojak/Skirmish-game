@@ -3,7 +3,20 @@ class_name Unit
 
 signal no_actions_left
 
+# Unit characteristics
 var actions := 2
+var movement_points := 4
+var health_points:=  10
+var toughness := 4
+var far:= 1
+var strenght := 4
+var attack := 3
+var hit := 4
+var crit := 6
+var type :=  "Standart"
+
+
+
 var current_id_path: Array[Vector2] = []
 
 func move_along_path(path: Array[Vector2]):
@@ -15,7 +28,7 @@ func move_along_path(path: Array[Vector2]):
 	current_id_path = path
 	actions -= 1
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if current_id_path.is_empty():
 		return
 	var target_position = current_id_path.front()

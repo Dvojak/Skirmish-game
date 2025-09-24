@@ -1,19 +1,18 @@
 extends Node2D
-var units = []
+class_name Player
+
+var units: Array[Unit] = []
 
 func _ready():
-	units = [$Unit1, $Unit2, $Unit3]
+	units = get_children().filter(func(c): return c is Unit)
 
 func reset_units():
 	for u in units:
-		u.reset_activation()
+		u.actions = u.max_actions
+		u.reset_position()
 
 func has_units_to_activate() -> bool:
-	for u in units:
-		if not u.activated:
-			return true
-	return false
+	return units.any(func(u): return u.actions > 0)
 
 func start_turn():
-	# Tady můžeš dát hráči možnost vybrat jednotku
 	print("Vyber jednotku k aktivaci.")
