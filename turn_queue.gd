@@ -21,11 +21,13 @@ func _ready():
 	astar_grid.update()
 	
 	position = tile_map.map_to_local(tile_map.local_to_map(global_position))
-	players = get_children().filter(func(c): return c is Player)
-	
-	for player in players:
-		for u in player.units:
-			u.connect("no_actions_left",Callable(self, "_on_finished_action"))	
+	players = []
+	for c in get_children():
+		if c is Player:
+			var p: Player = c
+			players.append(p)
+			for u in p.units:
+				u.connect("no_actions_left", Callable(self, "_on_finished_action"))
 	start_round()
 	
 func start_round():
@@ -60,7 +62,7 @@ func _on_finished_action():
 func _input(event):
 	if event.is_action_pressed("select"):
 		var u = _get_unit_under_mouse()
-		if u:
+		if u and u  in players[numc_player].units:
 			selected_unit = u
 			print("Vybral jsi jednotku: ", u.type)
 	if event.is_action_pressed("move") and selected_unit:
