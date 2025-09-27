@@ -1,7 +1,7 @@
 extends Node2D
 class_name Player
 
-var units: Array[Unit] = []
+var units:= []
 
 func _ready():
 	units = get_children().filter(func(c): return c is Unit)

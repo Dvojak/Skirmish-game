@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ysshp5tq8106"]
+[gd_scene load_steps=7 format=3 uid="uid://ysshp5tq8106"]
 
 [ext_resource type="Texture2D" uid="uid://bf72vuvnbi6no" path="res://tilemap_packed.png" id="1_drgk6"]
 [ext_resource type="Script" uid="uid://b8b0av0yde2fu" path="res://turn_queue.gd" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://l672bx7tfc0v" path="res://player.gd" id="4_7jktm"]
 [ext_resource type="Script" uid="uid://b2ig3848p6uce" path="res://scout.gd" id="5_7jktm"]
-[ext_resource type="Script" uid="uid://cmtpafqlvqvc8" path="res://unit.gd" id="5_ryrav"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ou5em"]
 texture = ExtResource("1_drgk6")
@@ -27,9 +26,6 @@ script = ExtResource("3_feb5d")
 
 [node name="player1" type="Node2D" parent="TurnManager"]
 script = ExtResource("4_7jktm")
-
-[node name="unit" type="Node2D" parent="TurnManager/player1"]
-script = ExtResource("5_ryrav")
 
 [node name="Scout" type="Node2D" parent="TurnManager/player1"]
 script = ExtResource("5_7jktm")
