@@ -1,5 +1,3 @@
 res://game.tscn
-res://unit.gd
 res://player.gd
-res://scout.gd
 res://turn_queue.gd

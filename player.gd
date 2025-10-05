@@ -8,8 +8,8 @@ func _ready():
 
 func reset_units():
 	for u in units:
-		u.actions = u.max_actions
-		u.reset_position()
+		u.actions = u.actions
+		
 
 func has_units_to_activate() -> bool:
 	return units.any(func(u): return u.actions > 0)

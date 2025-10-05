@@ -38,7 +38,7 @@ func start_round():
 	start_turn()
 func start_turn():
 	var  current_player = players[numc_player]
-	if current_player.has_units_active():
+	if current_player.has_units_to_activate():
 		print("Hraje: ", current_player.name)
 		current_player.start_turn()
 	else:
