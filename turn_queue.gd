@@ -3,7 +3,7 @@ extends Node2D
 class_name TurnManager
 
 
-@onready var tile_map =  $"../TileMap"
+@onready var tile_map: TileMapLayer = get_node_or_null("../TileMap/TileMapLayer")
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
 
