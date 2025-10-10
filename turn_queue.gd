@@ -44,14 +44,28 @@ func start_turn():
 	else:
 		end_turn()
 func _get_unit_under_mouse() -> Unit:
-	var world_pos = get_viewport().get_camera_2d().screen_to_world(get_viewport().get_mouse_position())
+	var camera := get_viewport().get_camera_2d()
+	if camera == null:
+		return null
+
+	var mouse_pos = get_viewport().get_mouse_position()
+	var world_pos = camera.get_screen_transform().affine_inverse() * mouse_pos
 	var space = get_world_2d().direct_space_state
-	var result = space.intersect_point(world_pos)
+	var query := PhysicsPointQueryParameters2D.new()
+	query.position = world_pos
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+	var result = space.intersect_point(query)
 	if result.size() > 0 and result[0].collider is Unit:
 		return result[0].collider	
 	return null
 func _get_tile_under_mouse() -> Vector2:
-	var world_pos = get_viewport().get_camera_2d().screen_to_world(get_viewport().get_mouse_position())
+	var camera := get_viewport().get_camera_2d()
+	if camera == null:
+		return Vector2.ZERO
+
+	var mouse_pos = get_viewport().get_mouse_position()
+	var world_pos = camera.get_screen_transform().affine_inverse() * mouse_pos
 	var tile_coords = tile_map.local_to_map(world_pos)
 	return tile_map.map_to_local(tile_coords)
 	
