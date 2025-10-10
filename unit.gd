@@ -2,8 +2,8 @@ extends Node2D
 class_name Unit
 
 signal no_actions_left
+var assigned: Player = null
 
-# Unit characteristics
 var actions := 2
 var movement_points := 4
 var health_points:=  10

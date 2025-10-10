@@ -28,10 +28,14 @@ script = ExtResource("3_feb5d")
 [node name="player1" type="Node2D" parent="TurnManager"]
 script = ExtResource("4_7jktm")
 
-[node name="Scout" type="Node2D" parent="TurnManager/player1"]
-script = ExtResource("5_7jktm")
-
 [node name="player2" type="Node2D" parent="TurnManager"]
 script = ExtResource("4_7jktm")
+
+[node name="Unit" type="Node2D" parent="TurnManager"]
+
+[node name="Scout" type="Node2D" parent="TurnManager/Unit"]
+script = ExtResource("5_7jktm")
+
+[node name="Sprite2D" type="Sprite2D" parent="TurnManager/Unit/Scout"]
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -4,6 +4,7 @@ class_name TurnManager
 
 
 @onready var tile_map: TileMapLayer = get_node_or_null("../TileMap/TileMapLayer")
+@onready var units_node = $"../Units"
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
 
@@ -28,6 +29,17 @@ func _ready():
 			players.append(p)
 			for u in p.units:
 				u.connect("no_actions_left", Callable(self, "_on_finished_action"))
+	
+	for u in units_node.get_children():
+		if u is Unit:
+			if "_P1" in u.name:
+				u.owner = players[0]
+				players[0].assign_unit(u)
+			elif "_P2" in u.name:
+				u.owner = players[1]
+				players[1].assign_unit(u)
+			u.connect("no_actions_left", Callable(self, "_on_finished_action"))
+			
 	start_round()
 	
 func start_round():

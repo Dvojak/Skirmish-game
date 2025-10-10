@@ -6,6 +6,12 @@ var units:= []
 func _ready():
 	units = get_children().filter(func(c): return c is Unit)
 
+
+func assign_unit(unit: Unit):
+	unit.owner = self
+	units.append(unit)
+
+
 func reset_units():
 	for u in units:
 		u.actions = u.actions
