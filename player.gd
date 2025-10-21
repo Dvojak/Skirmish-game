@@ -1,24 +1,17 @@
 extends Node2D
 class_name Player
 
-var units:= []
+var units: Array[Unit] = []
 
 func _ready():
-	units = get_children().filter(func(c): return c is Unit)
-
-
-func assign_unit(unit: Unit):
-	unit.owner = self
-	units.append(unit)
-
-
-func reset_units():
-	for u in units:
-		u.actions = u.actions
-		
-
+	print(name, " je připravený s jednotkami: ", units)
+	
 func has_units_to_activate() -> bool:
 	return units.any(func(u): return u.actions > 0)
 
 func start_turn():
-	print("Vyber jednotku k aktivaci.")
+	print(name, ": vyber jednotku k aktivaci.")
+
+func reset_units():
+	for u in units:
+		u.actions = u.max_actions

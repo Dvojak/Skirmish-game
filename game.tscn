@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=4 uid="uid://ysshp5tq8106"]
+[gd_scene load_steps=9 format=4 uid="uid://ysshp5tq8106"]
 
 [ext_resource type="Texture2D" uid="uid://bf72vuvnbi6no" path="res://tilemap_packed.png" id="1_drgk6"]
 [ext_resource type="Script" uid="uid://b8b0av0yde2fu" path="res://turn_queue.gd" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://l672bx7tfc0v" path="res://player.gd" id="4_7jktm"]
 [ext_resource type="Script" uid="uid://b2ig3848p6uce" path="res://scout.gd" id="5_7jktm"]
+[ext_resource type="Texture2D" uid="uid://delkxpwc4o1fx" path="res://first.png" id="5_ryrav"]
+[ext_resource type="Script" uid="uid://cmtpafqlvqvc8" path="res://unit.gd" id="6_ryrav"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
 texture = ExtResource("1_drgk6")
@@ -25,17 +27,26 @@ tile_set = SubResource("TileSet_7jktm")
 [node name="TurnManager" type="Node2D" parent="."]
 script = ExtResource("3_feb5d")
 
-[node name="player1" type="Node2D" parent="TurnManager"]
+[node name="player1" type="Node2D" parent="."]
 script = ExtResource("4_7jktm")
 
-[node name="player2" type="Node2D" parent="TurnManager"]
+[node name="player2" type="Node2D" parent="."]
 script = ExtResource("4_7jktm")
 
-[node name="Unit" type="Node2D" parent="TurnManager"]
+[node name="Unit" type="Node2D" parent="."]
+script = ExtResource("6_ryrav")
+metadata/_custom_type_script = "uid://cmtpafqlvqvc8"
 
-[node name="Scout" type="Node2D" parent="TurnManager/Unit"]
+[node name="Scout_P1" type="Node2D" parent="Unit"]
 script = ExtResource("5_7jktm")
 
-[node name="Sprite2D" type="Sprite2D" parent="TurnManager/Unit/Scout"]
+[node name="Sprite2D" type="Sprite2D" parent="Unit/Scout_P1"]
+texture = ExtResource("5_ryrav")
+
+[node name="Scout_P2" type="Node2D" parent="Unit"]
+script = ExtResource("5_7jktm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit/Scout_P2"]
+texture = ExtResource("5_ryrav")
 
 [node name="Camera2D" type="Camera2D" parent="."]

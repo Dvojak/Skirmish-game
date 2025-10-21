@@ -10,5 +10,3 @@ func _ready():
 	strenght = 3
 	attack = 4
 	type = "Scout"
-
-	sprite.texture = load("res://assets/units/scout.png")
