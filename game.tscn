@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://ysshp5tq8106"]
+[gd_scene load_steps=11 format=4 uid="uid://ysshp5tq8106"]
 
 [ext_resource type="Texture2D" uid="uid://bf72vuvnbi6no" path="res://tilemap_packed.png" id="1_drgk6"]
 [ext_resource type="Script" uid="uid://b8b0av0yde2fu" path="res://turn_queue.gd" id="3_feb5d"]
@@ -15,6 +15,12 @@ texture = ExtResource("1_drgk6")
 
 [sub_resource type="TileSet" id="TileSet_7jktm"]
 sources/0 = SubResource("TileSetAtlasSource_fc0e3")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryrav"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eow3j"]
+size = Vector2(16, 16)
 
 [node name="Game" type="Node2D"]
 
@@ -37,16 +43,24 @@ script = ExtResource("4_7jktm")
 script = ExtResource("6_ryrav")
 metadata/_custom_type_script = "uid://cmtpafqlvqvc8"
 
-[node name="Scout_P1" type="Node2D" parent="Unit"]
+[node name="Scout_P1" type="CharacterBody2D" parent="Unit"]
 script = ExtResource("5_7jktm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Unit/Scout_P1"]
+shape = SubResource("RectangleShape2D_ryrav")
 
 [node name="Sprite2D" type="Sprite2D" parent="Unit/Scout_P1"]
 texture = ExtResource("5_ryrav")
 
-[node name="Scout_P2" type="Node2D" parent="Unit"]
+[node name="Scout_P2" type="CharacterBody2D" parent="Unit"]
 script = ExtResource("5_7jktm")
 
 [node name="Sprite2D" type="Sprite2D" parent="Unit/Scout_P2"]
+position = Vector2(23, -3)
 texture = ExtResource("5_ryrav")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Unit/Scout_P2"]
+position = Vector2(24, -2)
+shape = SubResource("RectangleShape2D_eow3j")
 
 [node name="Camera2D" type="Camera2D" parent="."]

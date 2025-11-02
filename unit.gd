@@ -19,23 +19,44 @@ var type :=  "Standart"
 
 
 var current_id_path: Array[Vector2] = []
+var move_speed := 100.0 
 
-func move_along_path(path: Array[Vector2]):
+func _ready():
+	set_physics_process(true)
+
+func move_along_path(path: Array[Vector2]) -> void:
 	if actions == 0:
 		emit_signal("no_actions_left")
 		return
 	if path.is_empty():
+		print("⚠️ Cesta je prázdná, jednotka se nepohne.")
 		return
-	current_id_path = path
+	
+	print("Jednotka se pohybuje po cestě dlouhé: ", path.size())
 	actions -= 1
+
+
+	var tween = create_tween()
+	for point in path:
+		tween.tween_property(self, "global_position", point, 0.25).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	tween.tween_callback(Callable(self, "_on_move_finished"))
+
+func _on_move_finished():
+	print(" Jednotka dokončila pohyb.")
+	if actions == 0:
+		emit_signal("no_actions_left")
+
 
 func _physics_process(_delta):
 	if current_id_path.is_empty():
 		return
 	var target_position = current_id_path.front()
-	global_position = global_position.move_toward(target_position, 1)
+	global_position = global_position.move_toward(target_position, move_speed * _delta)
 	
 	if global_position == target_position:
 		current_id_path.pop_front()
-		if current_id_path.is_empty() and actions == 0:
-			emit_signal("no_actions_left")
+		if current_id_path.is_empty():
+			print("Jednotka dorazila na místo.")
+			if actions == 0:
+				emit_signal("no_actions_left")

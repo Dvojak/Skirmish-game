@@ -23,10 +23,8 @@ func _ready():
 	
 	position = tile_map.map_to_local(tile_map.local_to_map(global_position))
 	
-	# Nastavení hráčů
 	players = [player1, player2]
 
-	# Přiřazení jednotek hráčům podle jména
 	for u in units_container.get_children():
 		if u is Unit:
 			if "_P1" in u.name:
@@ -91,8 +89,13 @@ func _get_tile_under_mouse() -> Vector2:
 
 
 func _on_finished_action():
-	print("Jednotka dokončila všechny akce!")
+	var current_player = players[numc_player]
+
+	if not current_player.has_units_to_activate():
+		print(" Hráč", current_player.name, "už nemá žádné jednotky k aktivaci.")
+	
 	end_turn()
+
 
 
 func _input(event):
@@ -103,10 +106,16 @@ func _input(event):
 			print("Vybral jsi jednotku: ", u.type)
 	elif event.is_action_pressed("move") and selected_unit:
 		var target_tile = _get_tile_under_mouse()
-		var path = astar_grid.get_id_path(
-			tile_map.local_to_map(selected_unit.global_position),
-			tile_map.local_to_map(target_tile)
-		).slice(1)
+		var start = tile_map.local_to_map(selected_unit.global_position)
+		var end = tile_map.local_to_map(target_tile)
+		print("Start:", start, "End:", end)
+	
+		var path = astar_grid.get_id_path(start, end).slice(1)
+		print("Path:", path)
+
+		if path.is_empty():
+			print(" Žádná cesta nebyla nalezena!")
+			return
 
 		if path.size() > selected_unit.movement_points:
 			path = path.slice(0, selected_unit.movement_points)
@@ -115,13 +124,25 @@ func _input(event):
 		for p in path:
 			world_path.append(tile_map.map_to_local(p))
 
+		print("World path:", world_path)
 		selected_unit.move_along_path(world_path)
 
 
 func end_turn():
 	numc_player = (numc_player + 1) % players.size()
-	if players.any(func(p): p.has_units_to_activate()):
+	print("Tah hráče skončil, teď hraje:", players[numc_player].name)
+	
+	if players[numc_player].has_units_to_activate():
 		start_turn()
 	else:
-		print("Konec kola!")
-		start_round()
+		var any_active = false
+		for p in players:
+			if p.has_units_to_activate():
+				any_active = true
+				break
+
+		if any_active:
+			end_turn()
+		else:
+			print("💤 Konec kola, všichni hráči dohráli.")
+			start_round()
