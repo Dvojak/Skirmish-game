@@ -144,5 +144,5 @@ func end_turn():
 		if any_active:
 			end_turn()
 		else:
-			print("💤 Konec kola, všichni hráči dohráli.")
+			print(" Konec kola, všichni hráči dohráli.")
 			start_round()
