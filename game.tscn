@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=4 uid="uid://ysshp5tq8106"]
+[gd_scene load_steps=14 format=4 uid="uid://ysshp5tq8106"]
 
 [ext_resource type="Texture2D" uid="uid://bf72vuvnbi6no" path="res://tilemap_packed.png" id="1_drgk6"]
+[ext_resource type="Texture2D" uid="uid://efjs7di7c3am" path="res://sprites/overlay.png" id="2_eow3j"]
 [ext_resource type="Script" uid="uid://b8b0av0yde2fu" path="res://turn_queue.gd" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://l672bx7tfc0v" path="res://player.gd" id="4_7jktm"]
 [ext_resource type="Script" uid="uid://b2ig3848p6uce" path="res://scout.gd" id="5_7jktm"]
@@ -16,6 +17,13 @@ texture = ExtResource("1_drgk6")
 [sub_resource type="TileSet" id="TileSet_7jktm"]
 sources/0 = SubResource("TileSetAtlasSource_fc0e3")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j5wjh"]
+texture = ExtResource("2_eow3j")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_vef74"]
+sources/0 = SubResource("TileSetAtlasSource_j5wjh")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ryrav"]
 size = Vector2(16, 16)
 
@@ -29,6 +37,11 @@ size = Vector2(16, 16)
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMap"]
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAD/////AAAAAAAAAAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAMAAAAAAAAAAAD//wMAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD+/wAAAAAAAAAAAAD9////AAAAAAAAAAD+//7/AAAAAAAAAAD///7/AAAAAAAAAAD9/wAAAAAAAAAAAAD+////AAAAAAAAAAAAAP7/AAAAAAAAAAACAP//AAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAABAP7/AAAAAAAAAAACAP7/AAAAAAAAAAACAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAABAAMAAAAAAAAAAAD//wQAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wUAAAAAAAAAAAD9/wUAAAAAAAAAAAD9/wQAAAAAAAAAAAD8/wQAAAAAAAAAAAD8/wMAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wAAAAAAAAAAAAD9//7/AAAAAAAAAAD9//3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAQAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAACAAcAAAAAAAAAAAABAAgAAAAAAAAAAAABAAcAAAAAAAAAAAABAAYAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAEAAcAAAAAAAAAAAADAAcAAAAAAAAAAAACAAgAAAAAAAAAAAACAAYAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAFAAcAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAYAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_7jktm")
+
+[node name="MovementOverlay" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="MovementOverlay"]
+tile_set = SubResource("TileSet_vef74")
 
 [node name="TurnManager" type="Node2D" parent="."]
 script = ExtResource("3_feb5d")

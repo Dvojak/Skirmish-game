@@ -1,6 +1,7 @@
 extends Node2D
 class_name TurnManager
 
+@onready var overlay_map: TileMapLayer = get_node("../MovementOverlay/TileMapLayer")
 @onready var tile_map: TileMapLayer = get_node_or_null("../TileMap/TileMapLayer")
 @onready var units_container = get_node("../Unit")
 @onready var player1: Player = get_node("../player1")
@@ -34,6 +35,7 @@ func _ready():
 				u.oowner = player2
 				player2.units.append(u)
 			u.connect("no_actions_left", Callable(self, "_on_finished_action"))
+			u.connect("movement_finished", Callable(self, "_on_unit_move_finished"))
 	
 	print("Jednotky přiřazeny:")
 	for p in players:
@@ -90,11 +92,14 @@ func _get_tile_under_mouse() -> Vector2:
 
 func _on_finished_action():
 	var current_player = players[numc_player]
-
+	
 	if not current_player.has_units_to_activate():
 		print(" Hráč", current_player.name, "už nemá žádné jednotky k aktivaci.")
 	
 	end_turn()
+
+func _on_unit_move_finished():
+	overlay_map.clear()
 
 
 
@@ -104,6 +109,7 @@ func _input(event):
 		if u and u in players[numc_player].units:
 			selected_unit = u
 			print("Vybral jsi jednotku: ", u.type)
+			show_movement_range(u)
 	elif event.is_action_pressed("move") and selected_unit:
 		var target_tile = _get_tile_under_mouse()
 		var start = tile_map.local_to_map(selected_unit.global_position)
@@ -146,3 +152,34 @@ func end_turn():
 		else:
 			print(" Konec kola, všichni hráči dohráli.")
 			start_round()
+func show_movement_range(unit: Unit):
+	overlay_map.clear()
+	var start = tile_map.local_to_map(unit.global_position)
+	var reachable_tiles = get_reachable_tiles(start, unit.movement_points)
+	for tile in reachable_tiles:
+		overlay_map.set_cell(tile, 0, Vector2i.ZERO)
+
+func get_reachable_tiles(start: Vector2i, movement: int) -> Array[Vector2i]:
+	var visited = {}
+	var frontier: Array[Vector2i] = [start]
+	var reachable: Array[Vector2i] = []
+	visited[start] = 0
+	
+	while frontier.size() > 0:
+		var current = frontier.pop_front()
+		var cost = visited[current]
+		if cost >= movement:
+			continue
+		
+		for dir in [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1), Vector2i(0,-1)]:
+			var next = current + dir
+			if not tile_map.get_used_rect().has_point(next):
+				continue
+			if visited.has(next):
+				continue
+			
+			visited[next] = cost + 1
+			reachable.append(next)
+			frontier.append(next)
+	
+	return reachable
