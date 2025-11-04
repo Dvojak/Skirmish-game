@@ -6,6 +6,8 @@ class_name TurnManager
 @onready var units_container = get_node("../Unit")
 @onready var player1: Player = get_node("../player1")
 @onready var player2: Player = get_node("../player2")
+@onready var popup = get_node("../CanvasLayer/UnitStatPopup")
+
 
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
@@ -36,6 +38,7 @@ func _ready():
 				player2.units.append(u)
 			u.connect("no_actions_left", Callable(self, "_on_finished_action"))
 			u.connect("movement_finished", Callable(self, "_on_unit_move_finished"))
+			u.connect("unit_selected", Callable(popup, "show_stats"))
 	
 	print("Jednotky přiřazeny:")
 	for p in players:

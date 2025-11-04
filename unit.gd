@@ -3,6 +3,7 @@ class_name Unit
 
 signal no_actions_left
 signal movement_finished
+signal unit_selected
 
 
 var oowner: Player
@@ -50,6 +51,10 @@ func _on_move_finished():
 	emit_signal("movement_finished")
 	if actions == 0:
 		emit_signal("no_actions_left")
+
+func _input_event(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.pressed:
+		emit_signal("unit_selected", self)
 
 
 func _physics_process(_delta):
