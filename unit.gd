@@ -70,3 +70,11 @@ func _physics_process(_delta):
 			if actions == 0:
 				emit_signal("no_actions_left")
 			emit_signal("movement_finished")
+
+func apply_damage(amount: int) -> void:
+	health_points -= amount
+	print("%s dostal %d dmg. HP nyní: %d" % [self.name, amount, health_points])
+
+	if health_points <= 0:
+		queue_free()
+		print("%s zemřel!" % name)

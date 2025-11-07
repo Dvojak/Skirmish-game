@@ -103,6 +103,18 @@ func _on_finished_action():
 
 func _on_unit_move_finished():
 	overlay_map.clear()
+	
+	
+	var unit = selected_unit
+	var unit_pos = tile_map.local_to_map(unit.global_position)
+
+	for u in units_container.get_children():
+		if u == unit:
+			continue
+		if tile_map.local_to_map(u.global_position) == unit_pos:
+			print("!! Kontakt s nepřítelem → boj!")
+			start_combat(unit, u)
+			return
 
 
 
@@ -186,3 +198,30 @@ func get_reachable_tiles(start: Vector2i, movement: int) -> Array[Vector2i]:
 			frontier.append(next)
 	
 	return reachable
+
+
+func start_combat(attacker: Unit, defender: Unit):
+	print(" Boj začíná:", attacker.name, "útočí na", defender.name)
+
+	# 1) Určení potřebného hodu na zásah
+	var needed = 4
+	if attacker.strenght > defender.toughness:
+		needed = 3
+	elif attacker.strenght < defender.toughness:
+		needed = 5
+
+	print("Útočník potřebuje hodit:", needed, "nebo více")
+
+	# 2) Útočné hody podle attack stat
+	for i in range(attacker.attack):
+		var roll = randi_range(1, 6)
+		print("Hod:", roll)
+
+		if roll >= needed:
+			var damage = attacker.crit if roll == 6 else attacker.hit
+			print(" Zásah! Dmg:", damage)
+			defender.apply_damage(damage)
+		else:
+			print(" Minul")
+
+	print("Boj skončil.")

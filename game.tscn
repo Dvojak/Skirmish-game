@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://ysshp5tq8106"]
+[gd_scene load_steps=16 format=4 uid="uid://ysshp5tq8106"]
 
 [ext_resource type="Texture2D" uid="uid://bf72vuvnbi6no" path="res://tilemap_packed.png" id="1_drgk6"]
 [ext_resource type="Texture2D" uid="uid://efjs7di7c3am" path="res://sprites/overlay.png" id="2_eow3j"]
@@ -30,6 +30,8 @@ size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eow3j"]
 size = Vector2(16, 16)
+
+[sub_resource type="Theme" id="Theme_j5wjh"]
 
 [node name="Game" type="Node2D"]
 
@@ -87,6 +89,7 @@ shape = SubResource("RectangleShape2D_eow3j")
 oversampling_override = 1.0
 size = Vector2i(100, 220)
 visible = true
+theme = SubResource("Theme_j5wjh")
 script = ExtResource("8_j5wjh")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/UnitStatPopup"]
