@@ -1,6 +1,7 @@
 extends Node2D
 class_name TurnManager
 
+@onready var attack_overlay: TileMapLayer = get_node("../AttackOverlay/TileMapLayer")
 @onready var overlay_map: TileMapLayer = get_node("../MovementOverlay/TileMapLayer")
 @onready var tile_map: TileMapLayer = get_node_or_null("../TileMap/TileMapLayer")
 @onready var units_container = get_node("../Unit")
@@ -43,6 +44,8 @@ func _ready():
 	print("Jednotky přiřazeny:")
 	for p in players:
 		print(p.name, " má ", p.units.size(), " jednotek.")
+		
+
 	
 	start_round()
 
@@ -103,6 +106,7 @@ func _on_finished_action():
 
 func _on_unit_move_finished():
 	overlay_map.clear()
+	attack_overlay.clear()
 	
 	
 	var unit = selected_unit
@@ -125,17 +129,22 @@ func _input(event):
 			selected_unit = u
 			print("Vybral jsi jednotku: ", u.type)
 			show_movement_range(u)
+			show_attack_range(u)
 	elif event.is_action_pressed("move") and selected_unit:
+		var clicked_unit = _get_unit_under_mouse()
+
+		if clicked_unit and clicked_unit != selected_unit:
+			print("Klikl jsi na jednotku → pokusím se zaútočit")
+			try_attack(selected_unit, clicked_unit)
+			return
+
 		var target_tile = _get_tile_under_mouse()
 		var start = tile_map.local_to_map(selected_unit.global_position)
 		var end = tile_map.local_to_map(target_tile)
-		print("Start:", start, "End:", end)
-	
-		var path = astar_grid.get_id_path(start, end).slice(1)
-		print("Path:", path)
 
+		var path = astar_grid.get_id_path(start, end).slice(1)
 		if path.is_empty():
-			print(" Žádná cesta nebyla nalezena!")
+			print("Žádná cesta nebyla nalezena")
 			return
 
 		if path.size() > selected_unit.movement_points:
@@ -145,8 +154,8 @@ func _input(event):
 		for p in path:
 			world_path.append(tile_map.map_to_local(p))
 
-		print("World path:", world_path)
 		selected_unit.move_along_path(world_path)
+
 
 
 func end_turn():
@@ -174,6 +183,21 @@ func show_movement_range(unit: Unit):
 	for tile in reachable_tiles:
 		overlay_map.set_cell(tile, 0, Vector2i.ZERO)
 
+func show_attack_range(unit: Unit):
+	attack_overlay.clear()
+
+	var start = tile_map.local_to_map(unit.global_position)
+
+	for x in range(-unit.far, unit.far + 1):
+		for y in range(-unit.far, unit.far + 1):
+			var offset = Vector2i(x, y)
+			var target = start + offset
+
+			# jen políčka v manhattan vzdálenosti
+			if abs(x) + abs(y) <= unit.far:
+				attack_overlay.set_cell(target, 0, Vector2i.ZERO)
+		
+
 func get_reachable_tiles(start: Vector2i, movement: int) -> Array[Vector2i]:
 	var visited = {}
 	var frontier: Array[Vector2i] = [start]
@@ -198,7 +222,25 @@ func get_reachable_tiles(start: Vector2i, movement: int) -> Array[Vector2i]:
 			frontier.append(next)
 	
 	return reachable
+	
+func try_attack(attacker: Unit, defender: Unit):
+	if attacker.actions <= 0:
+		print("Jednotka už nemá akce.")
+		return
 
+	var start = tile_map.local_to_map(attacker.global_position)
+	var target = tile_map.local_to_map(defender.global_position)
+
+	if start.distance_to(target) > attacker.far:
+		print(" Cíl je mimo dosah útoku.")
+		return
+
+	start_combat(attacker, defender)
+	attacker.actions -= 1
+	print("Akce zbývající:", attacker.actions)
+
+	if attacker.actions <= 0:
+		_on_finished_action()  # konec tahu jednotky	
 
 func start_combat(attacker: Unit, defender: Unit):
 	print(" Boj začíná:", attacker.name, "útočí na", defender.name)

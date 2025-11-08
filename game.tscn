@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=4 uid="uid://ysshp5tq8106"]
+[gd_scene load_steps=19 format=4 uid="uid://ysshp5tq8106"]
 
 [ext_resource type="Texture2D" uid="uid://bf72vuvnbi6no" path="res://tilemap_packed.png" id="1_drgk6"]
 [ext_resource type="Texture2D" uid="uid://efjs7di7c3am" path="res://sprites/overlay.png" id="2_eow3j"]
 [ext_resource type="Script" uid="uid://b8b0av0yde2fu" path="res://turn_queue.gd" id="3_feb5d"]
+[ext_resource type="Texture2D" uid="uid://b40ckax5qib4p" path="res://sprites/attack_overlay.png" id="3_vef74"]
 [ext_resource type="Script" uid="uid://l672bx7tfc0v" path="res://player.gd" id="4_7jktm"]
 [ext_resource type="Script" uid="uid://b2ig3848p6uce" path="res://scout.gd" id="5_7jktm"]
 [ext_resource type="Texture2D" uid="uid://delkxpwc4o1fx" path="res://first.png" id="5_ryrav"]
@@ -25,6 +26,13 @@ texture = ExtResource("2_eow3j")
 [sub_resource type="TileSet" id="TileSet_vef74"]
 sources/0 = SubResource("TileSetAtlasSource_j5wjh")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vef74"]
+texture = ExtResource("3_vef74")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hve3p"]
+sources/0 = SubResource("TileSetAtlasSource_vef74")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ryrav"]
 size = Vector2(16, 16)
 
@@ -45,6 +53,11 @@ tile_set = SubResource("TileSet_7jktm")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="MovementOverlay"]
 tile_set = SubResource("TileSet_vef74")
+
+[node name="AttackOverlay" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="AttackOverlay"]
+tile_set = SubResource("TileSet_hve3p")
 
 [node name="TurnManager" type="Node2D" parent="."]
 script = ExtResource("3_feb5d")
@@ -74,11 +87,9 @@ input_pickable = true
 script = ExtResource("5_7jktm")
 
 [node name="Sprite2D" type="Sprite2D" parent="Unit/Scout_P2"]
-position = Vector2(23, -3)
 texture = ExtResource("5_ryrav")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Unit/Scout_P2"]
-position = Vector2(24, -2)
 shape = SubResource("RectangleShape2D_eow3j")
 
 [node name="Camera2D" type="Camera2D" parent="."]
