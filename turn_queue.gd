@@ -8,6 +8,12 @@ class_name TurnManager
 @onready var player1: Player = get_node("../player1")
 @onready var player2: Player = get_node("../player2")
 @onready var popup = get_node("../CanvasLayer/UnitStatPopup")
+@onready var initiative_ui = get_node("../CanvasLayer/Initiative")
+@onready var turn_label: Label = get_tree().get_root().get_node("MainScene/CanvasLayer/Initiative/Winner")
+
+
+
+
 
 
 var astar_grid: AStarGrid2D
@@ -45,16 +51,14 @@ func _ready():
 	for p in players:
 		print(p.name, " má ", p.units.size(), " jednotek.")
 		
-
-	
 	start_round()
 
 
 func start_round():
 	for p in players:
 		p.reset_units()
-	numc_player = 0
 	print("Začíná nové kolo")
+	roll_initiative() 
 	start_turn()
 
 
@@ -156,6 +160,38 @@ func _input(event):
 
 		selected_unit.move_along_path(world_path)
 
+func roll_initiative():
+	for p in players:
+		p.roll_initiative_dice()
+
+	var singles_p1 = _count_singles(players[0].dice_pool)
+	var singles_p2 = _count_singles(players[1].dice_pool)
+
+	var winner_index := -1
+
+	if singles_p1 == singles_p2:
+		print("Remíza, hází se znovu.")
+		roll_initiative()
+		return
+	else:
+		winner_index = 0 if singles_p1 > singles_p2 else 1
+
+	initiative_ui.show_dice(players[0].dice_pool, players[1].dice_pool, players[winner_index].name)
+
+	print("*** Začíná hráč:", players[winner_index].name, "***")
+	numc_player = winner_index
+
+func _count_singles(dice: Array[int]) -> int:
+	var occurrences := {}
+	for d in dice:
+		occurrences[d] = occurrences.get(d, 0) + 1
+
+	var singles = 0
+	for key in occurrences.keys():
+		if occurrences[key] == 1:
+			singles += 1
+
+	return singles
 
 
 func end_turn():
@@ -193,7 +229,6 @@ func show_attack_range(unit: Unit):
 			var offset = Vector2i(x, y)
 			var target = start + offset
 
-			# jen políčka v manhattan vzdálenosti
 			if abs(x) + abs(y) <= unit.far:
 				attack_overlay.set_cell(target, 0, Vector2i.ZERO)
 		
@@ -240,12 +275,12 @@ func try_attack(attacker: Unit, defender: Unit):
 	print("Akce zbývající:", attacker.actions)
 
 	if attacker.actions <= 0:
-		_on_finished_action()  # konec tahu jednotky	
+		_on_finished_action()  
 
 func start_combat(attacker: Unit, defender: Unit):
 	print(" Boj začíná:", attacker.name, "útočí na", defender.name)
 
-	# 1) Určení potřebného hodu na zásah
+
 	var needed = 4
 	if attacker.strenght > defender.toughness:
 		needed = 3
@@ -254,7 +289,7 @@ func start_combat(attacker: Unit, defender: Unit):
 
 	print("Útočník potřebuje hodit:", needed, "nebo více")
 
-	# 2) Útočné hody podle attack stat
+
 	for i in range(attacker.attack):
 		var roll = randi_range(1, 6)
 		print("Hod:", roll)
@@ -267,3 +302,9 @@ func start_combat(attacker: Unit, defender: Unit):
 			print(" Minul")
 
 	print("Boj skončil.")
+	
+	
+
+
+
+	

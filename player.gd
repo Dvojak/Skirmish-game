@@ -2,6 +2,7 @@ extends Node2D
 class_name Player
 
 var units: Array[Unit] = []
+var dice_pool: Array[int] = []
 
 func _ready():
 	print(name, " je připravený s jednotkami: ", units)
@@ -22,3 +23,8 @@ func start_turn():
 func reset_units():
 	for u in units:
 		u.actions = u.max_actions
+		
+func roll_initiative_dice():
+	dice_pool.clear()
+	for i in range(6):
+		dice_pool.append(randi_range(1, 6))

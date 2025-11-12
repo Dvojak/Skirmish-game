@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://ysshp5tq8106"]
+[gd_scene load_steps=20 format=4 uid="uid://ysshp5tq8106"]
 
 [ext_resource type="Texture2D" uid="uid://bf72vuvnbi6no" path="res://tilemap_packed.png" id="1_drgk6"]
 [ext_resource type="Texture2D" uid="uid://efjs7di7c3am" path="res://sprites/overlay.png" id="2_eow3j"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://delkxpwc4o1fx" path="res://first.png" id="5_ryrav"]
 [ext_resource type="Script" uid="uid://cmtpafqlvqvc8" path="res://unit.gd" id="6_ryrav"]
 [ext_resource type="Script" uid="uid://15ulgwexwh3i" path="res://popupmenu.gd" id="8_j5wjh"]
+[ext_resource type="Script" uid="uid://bpy607rbdym33" path="res://initiative.gd" id="10_hve3p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
 texture = ExtResource("1_drgk6")
@@ -73,6 +74,7 @@ script = ExtResource("6_ryrav")
 metadata/_custom_type_script = "uid://cmtpafqlvqvc8"
 
 [node name="Scout_P1" type="CharacterBody2D" parent="Unit"]
+position = Vector2(24, 8)
 input_pickable = true
 script = ExtResource("5_7jktm")
 
@@ -83,6 +85,7 @@ shape = SubResource("RectangleShape2D_ryrav")
 texture = ExtResource("5_ryrav")
 
 [node name="Scout_P2" type="CharacterBody2D" parent="Unit"]
+position = Vector2(-25, 8)
 input_pickable = true
 script = ExtResource("5_7jktm")
 
@@ -93,6 +96,7 @@ texture = ExtResource("5_ryrav")
 shape = SubResource("RectangleShape2D_eow3j")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -138,3 +142,25 @@ layout_mode = 2
 
 [node name="Crit" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
 layout_mode = 2
+
+[node name="Initiative" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_hve3p")
+
+[node name="Player1" type="Label" parent="CanvasLayer/Initiative"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Player2" type="Label" parent="CanvasLayer/Initiative"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Winner" type="Label" parent="CanvasLayer/Initiative"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
