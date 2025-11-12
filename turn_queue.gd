@@ -23,6 +23,7 @@ var numc_player = 0
 var selected_unit: Unit = null
 
 
+
 func _ready():
 	# Inicializace A*
 	astar_grid = AStarGrid2D.new()
