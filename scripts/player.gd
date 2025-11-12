@@ -18,6 +18,7 @@ func has_units_to_activate() -> bool:
 	return units.any(func(u): return u.actions > 0)
 
 func start_turn():
+	
 	print(name, ": vyber jednotku k aktivaci.")
 
 func reset_units():

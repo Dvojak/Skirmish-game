@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://delkxpwc4o1fx"
-path="res://.godot/imported/first.png-fa9d869e2f6f4633e23c7be7927d2644.ctex"
+uid="uid://dnfbmxmy3m3nm"
+path="res://.godot/imported/blueboy.png-df318902cc6e211dd79caa36c3174bb8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://first.png"
-dest_files=["res://.godot/imported/first.png-fa9d869e2f6f4633e23c7be7927d2644.ctex"]
+source_file="res://sprites/blueboy.png"
+dest_files=["res://.godot/imported/blueboy.png-df318902cc6e211dd79caa36c3174bb8.ctex"]
 
 [params]
 
