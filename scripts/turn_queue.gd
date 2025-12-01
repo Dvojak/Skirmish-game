@@ -32,6 +32,11 @@ func _ready():
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar_grid.update()
 	
+	for cell in tile_map.get_used_cells():
+		var tile_data = tile_map.get_cell_tile_data(cell)
+		var walkable = tile_data and tile_data.get_custom_data("Walkable")
+		astar_grid.set_point_solid(cell, not walkable)
+
 	position = tile_map.map_to_local(tile_map.local_to_map(global_position))
 	
 	players = [player1, player2]
@@ -213,6 +218,7 @@ func end_turn():
 		else:
 			print(" Konec kola, všichni hráči dohráli.")
 			start_round()
+
 func show_movement_range(unit: Unit):
 	overlay_map.clear()
 	var start = tile_map.local_to_map(unit.global_position)
@@ -227,37 +233,106 @@ func show_attack_range(unit: Unit):
 
 	for x in range(-unit.far, unit.far + 1):
 		for y in range(-unit.far, unit.far + 1):
-			var offset = Vector2i(x, y)
-			var target = start + offset
+			if abs(x) + abs(y) > unit.far:
+				continue
 
-			if abs(x) + abs(y) <= unit.far:
-				attack_overlay.set_cell(target, 0, Vector2i.ZERO)
-		
+			var target = start + Vector2i(x, y)
+
+			if target == start:
+				continue
+
+			if not tile_map.get_used_rect().has_point(target):
+				continue
+
+			
+			var tile_data = tile_map.get_cell_tile_data(target)
+			if tile_data == null:
+				continue
+			if not tile_data.get_custom_data("Walkable"):
+				continue
+
+			attack_overlay.set_cell(target, 0, Vector2i(0,0))
+
+
 
 func get_reachable_tiles(start: Vector2i, movement: int) -> Array[Vector2i]:
-	var visited = {}
-	var frontier: Array[Vector2i] = [start]
 	var reachable: Array[Vector2i] = []
-	visited[start] = 0
-	
+	var frontier: Array[Vector2i] = [start]
+	var visited: = { start: 0 }
+
 	while frontier.size() > 0:
-		var current = frontier.pop_front()
-		var cost = visited[current]
-		if cost >= movement:
+		var current: Vector2i = frontier.pop_front()
+		var current_cost: int = visited[current]
+
+		if current != start:
+			reachable.append(current)
+
+		if current_cost >= movement:
 			continue
-		
-		for dir in [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1), Vector2i(0,-1)]:
+
+		var dirs = [
+			Vector2i(1, 0),
+			Vector2i(-1, 0),
+			Vector2i(0, 1),
+			Vector2i(0, -1)
+		]
+
+		for dir in dirs:
 			var next = current + dir
-			if not tile_map.get_used_rect().has_point(next):
-				continue
+
 			if visited.has(next):
 				continue
-			
-			visited[next] = cost + 1
-			reachable.append(next)
+
+			if not tile_map.get_used_rect().has_point(next):
+				continue
+
+			var tile_data = tile_map.get_cell_tile_data(next)
+
+			if tile_data == null:
+				continue
+
+			if not tile_data.get_custom_data("Walkable"):
+				continue
+				
+			visited[next] = current_cost + 1
 			frontier.append(next)
-	
+
 	return reachable
+	
+	
+func has_line_of_sight_tile(start: Vector2i, end: Vector2i) -> bool:
+	var x0 = start.x
+	var y0 = start.y
+	var x1 = end.x
+	var y1 = end.y
+
+	var dx = abs(x1 - x0)
+	var sx = 1 if x0 < x1 else -1
+	var dy = -abs(y1 - y0)
+	var sy = 1 if y0 < y1 else -1
+	var err = dx + dy
+
+	while true:
+		
+		if not (x0 == start.x and y0 == start.y) and not (x0 == end.x and y0 == end.y):
+			var tile = Vector2i(x0, y0)
+			var tile_data = tile_map.get_cell_tile_data(tile)
+			if tile_data and not tile_data.get_custom_data("Walkable"):
+				return false
+
+		if x0 == x1 and y0 == y1:
+			break
+
+		var e2 = 2 * err
+		if e2 >= dy:
+			err += dy
+			x0 += sx
+		if e2 <= dx:
+			err += dx
+			y0 += sy
+
+	return true
+
 	
 func try_attack(attacker: Unit, defender: Unit):
 	if attacker.actions <= 0:
@@ -267,16 +342,19 @@ func try_attack(attacker: Unit, defender: Unit):
 	var start = tile_map.local_to_map(attacker.global_position)
 	var target = tile_map.local_to_map(defender.global_position)
 
-	if start.distance_to(target) > attacker.far:
-		print(" Cíl je mimo dosah útoku.")
+	if abs(start.x - target.x) + abs(start.y - target.y) > attacker.far:
+		print("Cíl je mimo dosah útoku.")
 		return
 
 	start_combat(attacker, defender)
+
 	attacker.actions -= 1
 	print("Akce zbývající:", attacker.actions)
 
 	if attacker.actions <= 0:
-		_on_finished_action()  
+		_on_finished_action()
+
+
 
 func start_combat(attacker: Unit, defender: Unit):
 	print(" Boj začíná:", attacker.name, "útočí na", defender.name)
