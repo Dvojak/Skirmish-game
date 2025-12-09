@@ -244,14 +244,17 @@ func show_attack_range(unit: Unit):
 			if not tile_map.get_used_rect().has_point(target):
 				continue
 
-			
-			var tile_data = tile_map.get_cell_tile_data(target)
+			var tile_data := tile_map.get_cell_tile_data(target)
 			if tile_data == null:
 				continue
+
 			if not tile_data.get_custom_data("Walkable"):
 				continue
 
-			attack_overlay.set_cell(target, 0, Vector2i(0,0))
+			if not has_line_of_sight_tile(start, target):
+				continue
+
+			attack_overlay.set_cell(target, 0, Vector2i.ZERO)
 
 
 
@@ -345,15 +348,17 @@ func try_attack(attacker: Unit, defender: Unit):
 	if abs(start.x - target.x) + abs(start.y - target.y) > attacker.far:
 		print("Cíl je mimo dosah útoku.")
 		return
+	
+	if not has_line_of_sight_tile(start, target):
+		print("Útok zablokován překážkou — není line of sight.")
+		return
 
 	start_combat(attacker, defender)
-
 	attacker.actions -= 1
 	print("Akce zbývající:", attacker.actions)
 
 	if attacker.actions <= 0:
 		_on_finished_action()
-
 
 
 func start_combat(attacker: Unit, defender: Unit):

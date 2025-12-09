@@ -1,7 +1,7 @@
 extends Unit
 class_name Scout
 
-@onready var sprite: Sprite2D = $Sprite2D
+	# -------------------------------------------------------	# -------------------------------------------------------	# -------------------------------------------------------	# -------------------------------------------------------@onready var sprite: Sprite2D = $Sprite2D
 
 func _ready():
 	movement_points = 6
@@ -9,4 +9,5 @@ func _ready():
 	toughness = 3
 	strenght = 3
 	attack = 4
+	far = 4
 	type = "Scout"
