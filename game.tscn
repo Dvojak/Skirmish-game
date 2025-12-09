@@ -1,0 +1,170 @@
+[gd_scene load_steps=21 format=4 uid="uid://ysshp5tq8106"]
+
+[ext_resource type="Texture2D" uid="uid://bf72vuvnbi6no" path="res://sprites/tilemap_packed.png" id="1_drgk6"]
+[ext_resource type="Texture2D" uid="uid://efjs7di7c3am" path="res://sprites/overlay.png" id="2_eow3j"]
+[ext_resource type="Script" uid="uid://b8b0av0yde2fu" path="res://scripts/turn_queue.gd" id="3_feb5d"]
+[ext_resource type="Texture2D" uid="uid://b40ckax5qib4p" path="res://sprites/attack_overlay.png" id="3_vef74"]
+[ext_resource type="Script" uid="uid://l672bx7tfc0v" path="res://scripts/player.gd" id="4_7jktm"]
+[ext_resource type="Script" uid="uid://b2ig3848p6uce" path="res://scripts/scout.gd" id="5_7jktm"]
+[ext_resource type="Script" uid="uid://cmtpafqlvqvc8" path="res://scripts/unit.gd" id="6_ryrav"]
+[ext_resource type="Script" uid="uid://15ulgwexwh3i" path="res://scripts/popupmenu.gd" id="8_j5wjh"]
+[ext_resource type="Texture2D" uid="uid://dnfbmxmy3m3nm" path="res://sprites/blueboy.png" id="8_mfdv2"]
+[ext_resource type="Texture2D" uid="uid://w4wml47cogn6" path="res://sprites/redboy.png" id="9_iotsf"]
+[ext_resource type="Script" uid="uid://bpy607rbdym33" path="res://scripts/initiative.gd" id="10_hve3p"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
+texture = ExtResource("1_drgk6")
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+1:0/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_7jktm"]
+custom_data_layer_0/name = "Walkable"
+custom_data_layer_0/type = 1
+sources/0 = SubResource("TileSetAtlasSource_fc0e3")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j5wjh"]
+texture = ExtResource("2_eow3j")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_vef74"]
+sources/0 = SubResource("TileSetAtlasSource_j5wjh")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vef74"]
+texture = ExtResource("3_vef74")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_hve3p"]
+sources/0 = SubResource("TileSetAtlasSource_vef74")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryrav"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eow3j"]
+size = Vector2(16, 16)
+
+[sub_resource type="Theme" id="Theme_j5wjh"]
+
+[node name="Game" type="Node2D"]
+
+[node name="TileMap" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="TileMap"]
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAD//wAAAAABAAAAAAD/////AAAAAAAAAAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAABAAEAAAABAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAMAAAAAAAAAAAD//wMAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD+/wAAAAAAAAAAAAD9////AAAAAAAAAAD+//7/AAAAAAAAAAD///7/AAAAAAAAAAD9/wAAAAAAAAAAAAD+////AAAAAAAAAAAAAP7/AAAAAAAAAAACAP//AAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAABAP7/AAAAAAAAAAACAP7/AAAAAAAAAAACAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAABAAMAAAAAAAAAAAD//wQAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wUAAAAAAAAAAAD9/wUAAAAAAAAAAAD9/wQAAAAAAAAAAAD8/wQAAAAAAAAAAAD8/wMAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wAAAAAAAAAAAAD9//7/AAAAAAAAAAD9//3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAQAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAACAAcAAAAAAAAAAAABAAgAAAAAAAAAAAABAAcAAAAAAAAAAAABAAYAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAEAAcAAAAAAAAAAAADAAcAAAAAAAAAAAACAAgAAAAAAAAAAAACAAYAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAFAAcAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAYAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_7jktm")
+
+[node name="MovementOverlay" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="MovementOverlay"]
+tile_set = SubResource("TileSet_vef74")
+
+[node name="AttackOverlay" type="Node2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="AttackOverlay"]
+tile_set = SubResource("TileSet_hve3p")
+
+[node name="TurnManager" type="Node2D" parent="."]
+script = ExtResource("3_feb5d")
+
+[node name="player1" type="Node2D" parent="."]
+script = ExtResource("4_7jktm")
+
+[node name="player2" type="Node2D" parent="."]
+script = ExtResource("4_7jktm")
+
+[node name="Unit" type="Node2D" parent="."]
+script = ExtResource("6_ryrav")
+metadata/_custom_type_script = "uid://cmtpafqlvqvc8"
+
+[node name="Scout_P1" type="CharacterBody2D" parent="Unit"]
+position = Vector2(24, 8)
+input_pickable = true
+script = ExtResource("5_7jktm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Unit/Scout_P1"]
+shape = SubResource("RectangleShape2D_ryrav")
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit/Scout_P1"]
+texture = ExtResource("8_mfdv2")
+
+[node name="Scout_P2" type="CharacterBody2D" parent="Unit"]
+position = Vector2(-25, 8)
+input_pickable = true
+script = ExtResource("5_7jktm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit/Scout_P2"]
+texture = ExtResource("9_iotsf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Unit/Scout_P2"]
+shape = SubResource("RectangleShape2D_eow3j")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UnitStatPopup" type="PopupPanel" parent="CanvasLayer"]
+oversampling_override = 1.0
+size = Vector2i(100, 220)
+visible = true
+theme = SubResource("Theme_j5wjh")
+script = ExtResource("8_j5wjh")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UnitStatPopup"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 216.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UnitStatPopup"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 216.0
+
+[node name="Health" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Toughness" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Movement" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Strenght" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Attack" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Far" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Hit" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Crit" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
+layout_mode = 2
+
+[node name="Initiative" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_hve3p")
+
+[node name="Player1" type="Label" parent="CanvasLayer/Initiative"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Player2" type="Label" parent="CanvasLayer/Initiative"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Winner" type="Label" parent="CanvasLayer/Initiative"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
