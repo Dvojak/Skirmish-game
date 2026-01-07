@@ -78,3 +78,23 @@ func apply_damage(amount: int) -> void:
 	if health_points <= 0:
 		queue_free()
 		print("%s zemřel!" % name)
+
+func is_engaged(tile_map: TileMapLayer, units_container: Node) -> bool:
+	var my_tile = tile_map.local_to_map(global_position)
+
+	var dirs = [
+		Vector2i(1, 0),
+		Vector2i(-1, 0),
+		Vector2i(0, 1),
+		Vector2i(0, -1)
+	]
+
+	for dir in dirs:
+		var check_tile = my_tile + dir
+		for u in units_container.get_children():
+			if u == self:
+				continue
+			if u.oowner != oowner:
+				if tile_map.local_to_map(u.global_position) == check_tile:
+					return true
+	return false

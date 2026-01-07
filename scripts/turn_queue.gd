@@ -5,22 +5,26 @@ class_name TurnManager
 @onready var overlay_map: TileMapLayer = get_node("../MovementOverlay/TileMapLayer")
 @onready var tile_map: TileMapLayer = get_node_or_null("../TileMap/TileMapLayer")
 @onready var units_container = get_node("../Unit")
-@onready var player1: Player = get_node("../player1")
-@onready var player2: Player = get_node("../player2")
+@onready var blue: Player = get_node("../BluePlayer")
+@onready var red: Player = get_node("../RedPlayer")
 @onready var popup = get_node("../CanvasLayer/UnitStatPopup")
 @onready var initiative_ui = get_node("../CanvasLayer/Initiative")
-@onready var turn_label: Label = get_tree().get_root().get_node("MainScene/CanvasLayer/Initiative/Winner")
+@onready var turn_label: Label = get_node("../CanvasLayer/Initiative/Winner")
+@onready var dice_label: Label = get_node("../CanvasLayer/Initiative/DicePanel/DiceLabel")
+@onready var current_label: Label = get_node("../CanvasLayer/TurnIndicator/TurnLabel")
 
 
 
 
 
 
+const DISENGAGE_RANGE := 3
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
 var players: Array[Player] = []
 var numc_player = 0
 var selected_unit: Unit = null
+
 
 
 
@@ -39,16 +43,16 @@ func _ready():
 
 	position = tile_map.map_to_local(tile_map.local_to_map(global_position))
 	
-	players = [player1, player2]
+	players = [blue, red]
 
 	for u in units_container.get_children():
 		if u is Unit:
 			if "_P1" in u.name:
-				u.oowner = player1
-				player1.units.append(u)
+				u.oowner = blue
+				blue.units.append(u)
 			elif "_P2" in u.name:
-				u.oowner = player2
-				player2.units.append(u)
+				u.oowner = red
+				red.units.append(u)
 			u.connect("no_actions_left", Callable(self, "_on_finished_action"))
 			u.connect("movement_finished", Callable(self, "_on_unit_move_finished"))
 			u.connect("unit_selected", Callable(popup, "show_stats"))
@@ -70,6 +74,8 @@ func start_round():
 
 func start_turn():
 	var current_player = players[numc_player]
+	current_label.text = current_player.name
+	current_label.show()
 	if current_player.has_units_to_activate():
 		print("Hraje: ", current_player.name)
 		current_player.start_turn()
@@ -137,17 +143,32 @@ func _input(event):
 		var u = _get_unit_under_mouse()
 		if u and u in players[numc_player].units:
 			selected_unit = u
-			print("Vybral jsi jednotku: ", u.type)
-			show_movement_range(u)
-			show_attack_range(u)
-	elif event.is_action_pressed("move") and selected_unit:
-		var clicked_unit = _get_unit_under_mouse()
+			print("Vybral jsi jednotku:", u.type)
 
+			overlay_map.clear()
+			attack_overlay.clear()
+
+			if u.is_engaged(tile_map, units_container):
+				print("⚔️ Jednotka je engaged → disengage overlay")
+				show_disengage_range(u)
+				show_attack_range(u)
+			else:
+				show_movement_range(u)
+				show_attack_range(u)
+
+	elif event.is_action_pressed("move") and selected_unit:
+
+	# 1️⃣ NEJDŘÍV zkus útok
+		var clicked_unit = _get_unit_under_mouse()
 		if clicked_unit and clicked_unit != selected_unit:
 			print("Klikl jsi na jednotku → pokusím se zaútočit")
 			try_attack(selected_unit, clicked_unit)
 			return
 
+	# 2️⃣ TEPRVE POTOM řeš pohyb / disengage
+		
+
+	# 3️⃣ Normální pohyb
 		var target_tile = _get_tile_under_mouse()
 		var start = tile_map.local_to_map(selected_unit.global_position)
 		var end = tile_map.local_to_map(target_tile)
@@ -156,8 +177,11 @@ func _input(event):
 		if path.is_empty():
 			print("Žádná cesta nebyla nalezena")
 			return
+		if selected_unit.is_engaged(tile_map, units_container):
+			if path.size() > DISENGAGE_RANGE:
+				path = path.slice(0, DISENGAGE_RANGE)
 
-		if path.size() > selected_unit.movement_points:
+		elif path.size() > selected_unit.movement_points:
 			path = path.slice(0, selected_unit.movement_points)
 
 		var world_path: Array[Vector2] = []
@@ -165,6 +189,10 @@ func _input(event):
 			world_path.append(tile_map.map_to_local(p))
 
 		selected_unit.move_along_path(world_path)
+		
+	elif event.is_action_pressed("wait") and selected_unit :
+		skip_unit_action()
+		return
 
 func roll_initiative():
 	for p in players:
@@ -186,6 +214,9 @@ func roll_initiative():
 
 	print("*** Začíná hráč:", players[winner_index].name, "***")
 	numc_player = winner_index
+
+
+
 
 func _count_singles(dice: Array[int]) -> int:
 	var occurrences := {}
@@ -255,6 +286,15 @@ func show_attack_range(unit: Unit):
 				continue
 
 			attack_overlay.set_cell(target, 0, Vector2i.ZERO)
+
+func show_disengage_range(unit: Unit):
+	overlay_map.clear()
+
+	var start = tile_map.local_to_map(unit.global_position)
+	var reachable = get_reachable_tiles(start, DISENGAGE_RANGE)
+
+	for tile in reachable:
+		overlay_map.set_cell(tile, 0, Vector2i.ZERO)
 
 
 
@@ -387,6 +427,29 @@ func start_combat(attacker: Unit, defender: Unit):
 
 	print("Boj skončil.")
 	
+func skip_unit_action():
+	if selected_unit.actions <= 0:
+		return
+
+	print(" Skip akce jednotky:", selected_unit.name)
+
+	# spotřebuj jednu akci
+	selected_unit.actions -= 1
+
+	# uklid overlaye
+	overlay_map.clear()
+	attack_overlay.clear()
+
+	# zruš výběr (důležité!)
+	selected_unit = null
+
+
+
+	# pokud jednotka nemá žádné akce, vyřeší se konec tahu
+	if selected_unit == null:
+		_on_finished_action()
+
+
 	
 
 

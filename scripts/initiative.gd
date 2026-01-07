@@ -1,5 +1,6 @@
 extends Control
 
+
 func show_dice(p1_dice: Array[int], p2_dice: Array[int], winner_name: String):
 	# Vyčisti staré labely
 	for child in get_children():
@@ -29,4 +30,5 @@ func show_dice(p1_dice: Array[int], p2_dice: Array[int], winner_name: String):
 
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 1.0, 0.4) # fade-in
+	tween.tween_interval(5.0)
 	tween.chain().tween_property(self, "modulate:a", 0.0, 1.0) # fade-out
