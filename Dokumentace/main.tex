@@ -1,155 +1,68 @@
 % ŠABLONA PRO PSANÍ ZÁVĚREČNÉ STUDIJNÍ PRÁCE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Autor: Jakub Dokulil (kubadokulil99@gmail.com)
-% Tato šablona byla vytvořena tak, aby pomocí ní mohli v systému LaTeX soutěžící sázet své práce a zároveň odpovídala požadavkům na formátování vyplývajícím z wordové šablony umístěné na webu soc.cz.
-%
-\documentclass[12pt, a4paper,
-%oneside,      %% -- odkomentujte, pokud chcete svou práci mít pouze jednostrannou, mezera pro hřbet pak automaticky bude pouze na levé straně
-twoside,        %% -- pro oboustranné práce, mezera pro hřbet následně střídá strany.
-openright
-]{report}
-
-
+\documentclass[12pt, a4paper, oneside, openright]{report}
 
 %% Nutné balíčky a nastavení
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\obor{INFORMAČNÍ TECHNOLOGIE} 
+\newcommand\kodOboru{18-20-M/01} 
+\newcommand\zamereni{se zaměřením na počítačové sítě a programování} 
+\newcommand\skola{Střední škola průmyslová a umělecká, Opava} 
+\newcommand\trida{IT4} 
+\newcommand\jmenoAutora{Walter Oboňa}
+\newcommand\skolniRok{2025/26} 
+\newcommand\datumOdevzdani{6. 1. 2026} 
+\newcommand\nazevPrace{Skirmish game} 
 
-%% Proměnné
-\newcommand\obor{INFORMAČNÍ TECHNOLOGIE} %% -- napiš číslo a název tvého oboru
-\newcommand\kodOboru{18-20-M/01} %% -- napiš číslo a název tvého oboru
-\newcommand\zamereni{se zaměřením na počítačové sítě a programování} %% -- napiš číslo a název tvého oboru
-\newcommand\skola{Střední škola průmyslová a umělecká, Opava} %% vyplň název školy
-\newcommand\trida{IT4} %% vyplň jméno svého konzultanta
-\newcommand\jmenoAutora{Walter Oboňa}  %% vyplň své jméno
-\newcommand\skolniRok{2025/26} %% vyplň rok
-\newcommand\datumOdevzdani{6. 1. 2026} %% vyplň rok
-\newcommand\nazevPrace{Skirmish game} %% vyplň název své práce
+\title{\nazevPrace} 
+\author{\jmenoAutora} 
+\date{\datumOdevzdani} 
 
-\title{\nazevPrace} %% -- Název tvé práce
-\author{\jmenoAutora} %% -- tvé jméno
-\date{\datumOdevzdani} %% -- rok, kdy píšeš SOČku
-
-\usepackage[top=2.5cm, bottom=2.5cm, left=3.5cm, right=1.5cm]{geometry} %% nastaví okraje, left -- vnitřní okraj, right -- vnější okraj
-
-\usepackage[czech]{babel} %% balík babel pro sazbu v češtině
-\usepackage[utf8]{inputenc} %% balíky pro kódování textu
+\usepackage[top=2.5cm, bottom=2.5cm, left=3.5cm, right=1.5cm]{geometry} 
+\usepackage{float}
+\usepackage[czech]{babel} 
+\usepackage[utf8]{inputenc} 
 \usepackage[T1]{fontenc}
-\usepackage{cmap} %% balíček zajišťující, že vytvořené PDF bude prohledávatelné a kopírovatelné
+\usepackage{cmap} 
+\usepackage{graphicx} 
+\usepackage{subcaption} 
+\usepackage{hyperref} 
+\linespread{1.25} 
+\setlength{\parskip}{0.5em} 
 
-\usepackage{graphicx} %% balík pro vkládání obrázků
-
-\usepackage{subcaption} %% balíček pro vkládání podobrázků
-
-\usepackage{hyperref} %% balíček, který v PDF vytváří odkazy
-
-\linespread{1.25} %% řádkování
-\setlength{\parskip}{0.5em} %% odsazení mezi odstavci
-
-
-\usepackage[pagestyles]{titlesec} %% balíček pro úpravu stylu kapitol a sekcí
+\usepackage[pagestyles]{titlesec} 
 \titleformat{\chapter}[block]{\scshape\bfseries\LARGE}{\thechapter}{10pt}{\vspace{0pt}}[\vspace{-22pt}]
 \titleformat{\section}[block]{\scshape\bfseries\Large}{\thesection}{10pt}{\vspace{0pt}}
 \titleformat{\subsection}[block]{\bfseries\large}{\thesubsection}{10pt}{\vspace{0pt}}
 
-
-\usepackage{tocloft} % Balíček umožní přizpůsobit vzhled tabulky obsahu
-\setlength{\cftbeforechapskip}{0pt}  % Menší rozestup pro kapitoly
-\setlength{\cftbeforesecskip}{0pt}   % Menší rozestup pro sekce
+\usepackage{tocloft} 
+\setlength{\cftbeforechapskip}{0pt}
+\setlength{\cftbeforesecskip}{0pt}
 
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{1}
 \usepackage{fancyhdr}
-\pagestyle{fancy}
+\pagestyle{plain}
 \renewcommand{\headrulewidth}{0.025pt}
-
 \usepackage{booktabs}
-
 \usepackage{url}
-
-%% Balíčky co se můžou hodit :) 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\usepackage{pdfpages} %% Balíček umožňující vkládat stránky z PDF souborů, 
-
-\usepackage{upgreek} %% Balíček pro sazbu stojatých řeckých písmen, třeba u jednotky mikrometr. Například stojaté mí: \upmu, stojaté pí: \uppi
-
-\usepackage{amsmath}    %% Balíčky amsmath a amsfonts 
-\usepackage{amsfonts}   %% pro sazbu matematických symbolů
-\usepackage{esint}     %% pro sazbu různých integrálů (např \oiint)
+\usepackage{pdfpages} 
+\usepackage{upgreek} 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{esint}
 \usepackage{mathrsfs}
-\usepackage{helvet} % Helvet font
-\usepackage{mathptmx} % Times New Roman
-\makeatletter
-\@namedef{ver@figureversions.sty}{9999/99/99}
-\newcommand{\DeclareFigureVersion}[2]{}
-\newcommand{\figureversion}[1]{}
-\makeatother
-
-
-\makeatletter
-\providecommand{\superiorSup}{}
-\providecommand{\textOsF}{}
-\providecommand{\textTOsF}{}
-\providecommand{\liningLF}{}
-\providecommand{\liningTLF}{}
-\providecommand{\tabularTab}{}
-\providecommand{\proportionalProp}{}
-\makeatother
-\makeatletter
-\providecommand{\superiorSup}{}
-\providecommand{\textOsF}{}
-\providecommand{\textTOsF}{}
-\providecommand{\liningLF}{}
-\providecommand{\liningTLF}{}
-\providecommand{\tabularTab}{}
-\providecommand{\proportionalProp}{}
-\providecommand{\tabularmath}{}
-\providecommand{\proportionalmath}{}
-\makeatother
-
-\usepackage{Oswald} % Oswald font
-
-
-%% makra pro sazbu matematiky
-\newcommand{\dif}{\mathrm{d}} %% makro pro sazbu diferenciálu, místo toho
-%% abych musel psát '\mathrm{d}' mi stačí napsat '\dif' což je mnohem 
-%% kratší a mohu si tak usnadnit práci
+\usepackage{helvet} 
+\usepackage{mathptmx} 
+\usepackage{Oswald} 
 
 \usepackage{listings}
 \usepackage{xcolor}
 
-\renewcommand{\lstlistingname}{Kód}% Listing -> Algorithm
-\renewcommand{\lstlistlistingname}{Seznam programových kódů}% List of Listings -> List of Algorithms
+\renewcommand{\lstlistingname}{Kód}
+\renewcommand{\lstlistlistingname}{Seznam programových kódů}
 
-%% Definice 
-\lstdefinelanguage{JavaScript}{
-	morekeywords=[1]{break, continue, delete, else, for, function, if, in,
-		new, return, this, typeof, var, void, while, with},
-	% Literals, primitive types, and reference types.
-	morekeywords=[2]{false, null, true, boolean, number, undefined,
-		Array, Boolean, Date, Math, Number, String, Object},
-	% Built-ins.
-	morekeywords=[3]{eval, parseInt, parseFloat, escape, unescape},
-	sensitive,
-	morecomment=[s]{/*}{*/},
-	morecomment=[l]//,
-	morecomment=[s]{/**}{*/}, % JavaDoc style comments
-	morestring=[b]',
-	morestring=[b]"
-}[keywords, comments, strings]
-
-
-\lstdefinelanguage[ECMAScript2015]{JavaScript}[]{JavaScript}{
-	morekeywords=[1]{await, async, case, catch, class, const, default, do,
-		enum, export, extends, finally, from, implements, import, instanceof,
-		let, static, super, switch, throw, try},
-	morestring=[b]` % Interpolation strings.
-}
-
-\lstalias[]{ES6}[ECMAScript2015]{JavaScript}
-
-% Nastavení barev
-% Requires package: color.
+% Nastavení barev pro kód
 \definecolor{mediumgray}{rgb}{0.3, 0.4, 0.4}
 \definecolor{mediumblue}{rgb}{0.0, 0.0, 0.8}
 \definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
@@ -157,122 +70,50 @@ openright
 \definecolor{royalblue}{rgb}{0.25, 0.41, 0.88}
 \definecolor{crimson}{rgb}{0.86, 0.8, 0.24}
 
-% Nastavení pro Python
+% Styl pro GDScript (pomocí Python definice)
 \lstdefinestyle{Python}{
 	language=Python,
 	backgroundcolor=\color{white},
-	basicstyle=\ttfamily,
+	basicstyle=\ttfamily\footnotesize, % Menší písmo pro kód
 	breakatwhitespace=false,
-	breaklines=false,
+	breaklines=true,
 	captionpos=b,
 	columns=fullflexible,
 	commentstyle=\color{mediumgray}\upshape,
-	emph={},
-	emphstyle=\color{crimson},
-	extendedchars=true,  % requires inputenc
-	fontadjust=true,
+	extendedchars=true,
 	frame=single,
-	identifierstyle=\color{black},
 	keepspaces=true,
 	keywordstyle=\color{mediumblue},
-	keywordstyle={[2]\color{darkviolet}},
-	keywordstyle={[3]\color{royalblue}},
-	literate=%
-	{á}{{\'a}}1 {č}{{\v{c}}}1 {ď}{{\v{d}}}1 {é}{{\'e}}1 {ě}{{\v{e}}}1
-	{í}{{\'i}}1 {ň}{{\v{n}}}1 {ó}{{\'o}}1 {ř}{{\v{r}}}1 {š}{{\v{s}}}1
-	{ť}{{\v{t}}}1 {ú}{{\'u}}1 {ů}{{\r{u}}}1 {ý}{{\'y}}1 {ž}{{\v{z}}}1,		
 	numbers=left,
 	numbersep=5pt,
 	numberstyle=\tiny\color{black},
 	rulecolor=\color{black},
 	showlines=true,
-	showspaces=false,
-	showstringspaces=false,
-	showtabs=false,
 	stringstyle=\color{forestgreen},
-	tabsize=2,
+	tabsize=4,
 	title=\lstname,
-	upquote=true  % requires textcomp	
+	upquote=true
 }
 
-
-\lstdefinestyle{JSES6Base}{
-	backgroundcolor=\color{white},
-	basicstyle=\ttfamily,
-	breakatwhitespace=false,
-	breaklines=false,
-	captionpos=b,
-	columns=fullflexible,
-	commentstyle=\color{mediumgray}\upshape,
-	emph={},
-	emphstyle=\color{crimson},
-	extendedchars=true,  % requires inputenc
-	fontadjust=true,
-	frame=single,
-	identifierstyle=\color{black},
-	keepspaces=true,
-	keywordstyle=\color{mediumblue},
-	keywordstyle={[2]\color{darkviolet}},
-	keywordstyle={[3]\color{royalblue}},
- literate=%
-{á}{{\'a}}1 {č}{{\v{c}}}1 {ď}{{\v{d}}}1 {é}{{\'e}}1 {ě}{{\v{e}}}1
-{í}{{\'i}}1 {ň}{{\v{n}}}1 {ó}{{\'o}}1 {ř}{{\v{r}}}1 {š}{{\v{s}}}1
-{ť}{{\v{t}}}1 {ú}{{\'u}}1 {ů}{{\r{u}}}1 {ý}{{\'y}}1 {ž}{{\v{z}}}1,		
-	numbers=left,
-	numbersep=5pt,
-	numberstyle=\tiny\color{black},
-	rulecolor=\color{black},
-	showlines=true,
-	showspaces=false,
-	showstringspaces=false,
-	showtabs=false,
-	stringstyle=\color{forestgreen},
-	tabsize=2,
-	title=\lstname,
-	upquote=true  % requires textcomp
-}
-
-\lstdefinestyle{JavaScript}{
-	language=JavaScript,
-	style=JSES6Base,
-}
-\lstdefinestyle{ES6}{
-	language=ES6,
-	style=JSES6Base
-}
-
-\setlength{\headheight}{15pt}
-
-%% Bordel pro práci - můžeš smáznout :) 
-%%%%%%%%%%%%%%%%%%%
-
-\usepackage{lipsum} %% balíček který píše lipsum (nesmyslný text, který se používá pro kontrolu typografie)
-
-\AtBeginDocument{\clearpage\pagestyle{empty}}
+\AtBeginDocument{\clearpage\pagestyle{plain}}
 
 %% Začátek dokumentu
 %%%%%%%%%%%%%%%%%%%%
 \begin{document}
 	
-	\pagestyle{empty}
+	\pagestyle{plain}
 	\pagenumbering{Roman}
-	
 	\cleardoublepage
 
-%% Titulní stránka s informacemi
+%% Titulní stránka
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	
 	{\fontfamily{phv}\selectfont
-		%% Logo školy
 		\begin{figure}[h]
 			\centering
 			\includegraphics[width=0.6\linewidth]{image/logo-skoly.png} 
 		\end{figure}
 		
-		
-		%% Hlavička práce a její název (viz proměnná \nazev prace)
-		%% \sffamily %%% bezpatkové písmo - sans serif
-		{\bfseries %%% písmo na stránce je tučně
+		{\bfseries 
 			\begin{center}
 				\vspace{0.025 \textheight}
 				\LARGE{ZÁVĚREČNÁ STUDIJNÍ PRÁCE}\\
@@ -280,7 +121,7 @@ openright
 				\vspace{0.075 \textheight}
 				\LARGE {\nazevPrace}\\
 			\end{center}  
-		}%%%
+		}
 		
 		\begin{figure}[h]
 			\centering
@@ -288,7 +129,6 @@ openright
 		\end{figure}
 		
 		\vfill
-		%% Uprava - misto floating table pouzijeme pevne zarovnani na spodek stranky
 		\begin{center}
 			\begin{tabular}{ll}
 				\textbf{Autor:} & \jmenoAutora\\ 
@@ -300,17 +140,12 @@ openright
 		\end{center}		
 	}
 	
-\cleardoublepage %% Zalomení dvojstránky
+\cleardoublepage 
 	
-%% Stránka obsahující poděkování a prohlášení
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%% Prohlášení - povinné
+%% Prohlášení
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	\noindent{\large{\bfseries{Prohlášení}\\}}  %% uprav si koncovky podle toho na jaký rod se cítíš, vypadá to pak lépe :) 
-	\noindent{Prohlašuji, že jsem závěrečnou práci vypracoval samostatně a uvedl veškeré použité 
-		informační zdroje.\\}
+	\noindent{\large{\bfseries{Prohlášení}\\}}
+	\noindent{Prohlašuji, že jsem závěrečnou práci vypracoval samostatně a uvedl veškeré použité informační zdroje.\\}
 	\noindent{Souhlasím, aby tato studijní práce byla použita k výukovým a prezentačním účelům na Střední průmyslové a umělecké škole v Opavě, Praskova 399/8.}
 	\vfill
 	\noindent{V Opavě \datumOdevzdani\\}
@@ -323,74 +158,57 @@ openright
 		\end{tabular}
 	\end{minipage}
 	
-	\cleardoublepage %% Zalomení dvojstránky
+	\cleardoublepage 
 
-%% Stránka obsahující abstrakt (anotaci)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-
-%% Abstrakt v češtině
+%% Abstrakt
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\noindent{\Large{\bfseries{Abstrakt}\\}}
 	\noindent
 Tato závěrečná studijní práce se zabývá návrhem a implementací jednoduché tahové skirmish hry vytvořené v herním enginu Godot. Cílem práce bylo navrhnout funkční herní systém, který zahrnuje správu herních jednotek, tahový systém, pohyb po mapě, bojový mechanismus a uživatelské rozhraní.
 
-Praktická část práce se zaměřuje na implementaci herní logiky pomocí skriptovacího jazyka GDScript, návrh herní mapy založené na dlaždicích a práci s herními objekty. Důraz je kladen na přehlednou strukturu kódu, využití objektově orientovaného přístupu a správu herních stavů, jako je střídání hráčů a vyhodnocování soubojů.
+Praktická část práce se zaměřuje na implementaci herní logiky pomocí skriptovacího jazyka GDScript, návrh herní mapy založené na dlaždicích a práci s herními objekty. Důraz je kladen na přehlednou strukturu kódu, využití objektově orientovaného přístupu a správu herních stavů.
 
-Výsledkem práce je funkční prototyp tahové hry pro dva hráče, který demonstruje základní principy vývoje her a může sloužit jako základ pro další rozšíření, například o umělou inteligenci, nové jednotky nebo komplexnější herní mechaniky.
-
+Výsledkem práce je funkční prototyp tahové hry pro dva hráče, který demonstruje základní principy vývoje her a může sloužit jako základ pro další rozšíření.
 	
 	\vspace{18pt}
-	
 	\noindent{\large{\bfseries{Klíčová slova}}}
-	
 	\noindent skirmish hra, tahová hra, Godot Engine, GDScript, herní logika, vývoj her
-	
 	\vspace{18pt}
 
-%% Abstrakt v angličtině
+%% Abstract
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 	\noindent{\Large{\bfseries{Abstract}}}
-	
 	\noindent
 This final study project focuses on the design and implementation of a simple turn-based skirmish game developed using the Godot game engine. The main goal of the project was to create a functional game system including unit management, turn handling, tile-based movement, combat mechanics, and a basic user interface.
 
-The practical part of the project describes the implementation of game logic using the GDScript programming language, the design of a tile-based game map, and the interaction between game objects. Emphasis is placed on clear code structure, the use of object-oriented programming principles, and proper management of game states such as turn switching and combat resolution.
+The practical part of the project describes the implementation of game logic using the GDScript programming language, the design of a tile-based game map, and the interaction between game objects. Emphasis is placed on clear code structure, the use of object-oriented programming principles, and proper management of game states.
 
-The result of the project is a functional prototype of a two-player turn-based game that demonstrates fundamental principles of game development and can serve as a foundation for future extensions, such as artificial intelligence, additional units, or more advanced game mechanics.
-
+The result of the project is a functional prototype of a two-player turn-based game that demonstrates fundamental principles of game development and can serve as a foundation for future extensions.
 	
 	\vspace{18pt}
-	
 	\noindent{\large{\bfseries{Keywords}}}
-	
 	\noindent  skirmish game, turn-based game, Godot Engine, GDScript, game logic, game development
 
-	
-	\clearpage %% Zalomení stránky
+	\clearpage 
 
-%% Stránka s generovaným obsahem
+%% Obsah
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
-	
-	\tableofcontents %% Vygeneruje tabulku s obsahem
+	\tableofcontents 
+	\pagenumbering{arabic} 
+	\setcounter{page}{1} 
 
-	\pagenumbering{arabic} %% Nastavení způsobu číslování stránek (alternativy roman | Roman)
-	\setcounter{page}{1} %% Nastavení počitadla stránek
-
-
-%% Stránka s úvodem
+%% Úvod
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
 \chapter*{Úvod}
 \addcontentsline{toc}{chapter}{Úvod}
 
 Svět stolních a deskových her mě fascinoval odjakživa. Od rychlých karetních her až po komplexní strategie trvající několik hodin, které svými mechanikami představují výzvu i pro zkušené hráče. Při výběru tématu závěrečné práce proto byla moje volba jasná – chtěl jsem propojit svou vášeň pro deskové hry s programováním a přenést zážitek z fyzického stolu do digitálního prostředí.
 
-Rozhodování o konkrétním titulu nebylo snadné. Zvažoval jsem adaptaci sběratelských karetních her, jako je \textit{Magic: The Gathering}, kterými jsem se inspiroval již v minulosti, nebo naopak komplexních asymetrických strategií typu \textit{Root}. Nakonec jsem však zvolil "zlatou střední cestu" – hru \textit{Warhammer Warcry}.
+Rozhodování o konkrétním titulu nebylo snadné. Zvažoval jsem adaptaci sběratelských karetních her nebo komplexních asymetrických strategií. Nakonec jsem však zvolil "zlatou střední cestu" – inspiraci hrou \textit{Warhammer Warcry}. Jedná se o tzv. skirmishovou strategii, ve které se střetávají dvě menší skupiny jednotek. Cílem je eliminace soupeře.
 
-Jedná se o tzv. skirmishovou strategii, ve které se střetávají dvě menší skupiny jednotek. Cílem je buď eliminace soupeře, nebo splnění taktických úkolů. Tato hra nabízí ideální rovnováhu: její pravidla jsou srozumitelná, ale zároveň poskytují dostatečnou hloubku pro implementaci zajímavých programátorských výzev, jako je pohyb po mřížce (gridu) nebo systém viditelnosti ve 2D prostoru.
+Vývoj v herním enginu Godot se ukázal být náročnější, než jsem původně předpokládal, zejména kvůli nedostatku specifických materiálů pro tento typ her v novější verzi enginu. Proces byl provázen mnoha slepými uličkami a nutností opakovaně přepisovat části kódu (refactoring). Tato zkušenost však byla ve výsledku neocenitelná – naučila mě nejen lépe ovládat jazyk GDScript, ale především analyticky přemýšlet o architektuře softwarového projektu.
 
-Samotný vývoj v herním enginu Godot se ukázal být náročnější, než jsem původně předpokládal. Záhy jsem narazil na nedostatek specifických výukových materiálů a tutoriálů pro tento konkrétní typ hry, což mě donutilo hledat vlastní řešení a experimentovat. Proces byl provázen mnoha slepými uličkami a nutností opakovaně přepisovat části kódu (refactoring). Tato zkušenost však byla ve výsledku neocenitelná – naučila mě nejen lépe ovládat jazyk GDScript, ale především analyticky přemýšlet o architektuře softwarového projektu.
-
-Předkládaná práce je rozdělena do čtyř hlavních částí. První kapitola představuje použité technologie, zejména engine Godot a grafický editor Aseprite. Druhá kapitola se věnuje návrhu architektury aplikace a struktuře herní scény. Třetí, nejobsáhlejší kapitola, detailně popisuje technickou implementaci klíčových mechanik, jako je algoritmus A* pro hledání cesty, Bresenhamův algoritmus pro viditelnost nebo systém iniciativy. Závěr práce pak shrnuje dosažené výsledky a hodnotí funkčnost vytvořeného prototypu.
+Předkládaná práce je rozdělena do čtyř hlavních částí. První kapitola představuje použité technologie. Druhá kapitola se věnuje popisu hry z pohledu hráče a adaptaci pravidel pro digitální prostředí. Třetí a čtvrtá kapitola pak detailně popisují technickou implementaci klíčových mechanik.
 
 
 %% ==========================================
@@ -398,214 +216,336 @@ Předkládaná práce je rozdělena do čtyř hlavních částí. První kapitol
 %% ==========================================
 \chapter{Použité technologie a nástroje}
 
-V této kapitole jsou představeny softwarové nástroje, které byly zvoleny pro realizaci projektu, a teoretické principy klíčových algoritmů.
+V této kapitole jsou představeny softwarové nástroje, které byly zvoleny pro realizaci projektu.
 
 \section{Godot Engine}
-Pro vývoj hry byl zvolen herní engine Godot ve verzi 4.x. Jedná se o open-source nástroj (licence MIT), který poskytuje komplexní prostředí pro tvorbu 2D i 3D her. Oproti konkurenčním enginům, jako jsou Unity nebo Unreal Engine, vyniká Godot svou lehkostí a unikátní architekturou.
+Pro vývoj hry byl zvolen herní engine Godot ve verzi 4.x. Jedná se o open-source nástroj (licence MIT), který poskytuje komplexní prostředí pro tvorbu 2D i 3D her. Oproti konkurenčním enginům vyniká svou lehkostí a unikátní architekturou.
 
 \subsection{Architektura uzlů a scén}
-Základním stavebním kamenem Godotu je systém uzlů (Nodes). Každý herní objekt, ať už jde o postavu, mapu nebo zvukový přehrávač, je uzel. Uzly se skládají do stromové struktury (Scene Tree).
-Tato hierarchie umožňuje vysokou modularitu – komplexní objekty (např. hráč) jsou složeny z jednodušších uzlů (Sprite, Kolizní tvar, Kamera), které lze uložit jako samostatnou scénu a instancovat ji v jiných částech projektu.
+Základním stavebním kamenem Godotu je systém uzlů (Nodes). Každý herní objekt, ať už jde o postavu, mapu nebo zvukový přehrávač, je uzel. Uzly se skládají do stromové struktury (Scene Tree). Tato hierarchie umožňuje vysokou modularitu.
 
 \subsection{Systém signálů}
-Pro komunikaci mezi objekty využívá Godot návrhový vzor Observer, implementovaný formou signálů. To umožňuje, aby objekty vysílaly zprávy o změně svého stavu (např. \uv{jednotka dokončila pohyb}), aniž by musely znát příjemce této zprávy. Tento přístup zajišťuje oddělení logiky (decoupling) a přehlednější kód.
+Pro komunikaci mezi objekty využívá Godot návrhový vzor Observer, implementovaný formou signálů. To umožňuje, aby objekty vysílaly zprávy o změně svého stavu (např. \uv{jednotka dokončila pohyb}), aniž by musely znát příjemce této zprávy.
 
 \section{Jazyk GDScript}
-Logika hry je psána v jazyce GDScript, který byl vyvinut speciálně pro potřeby enginu Godot. Jedná se o vysokoúrovňový jazyk, jehož syntaxe je silně inspirována jazykem Python (využívá odsazování bloků kódu).
-
+Logika hry je psána v jazyce GDScript, který byl vyvinut speciálně pro potřeby enginu Godot. Jedná se o vysokoúrovňový jazyk inspirovaný Pythonem.
 Mezi klíčové vlastnosti jazyka využité v této práci patří:
 \begin{itemize}
-	\item \textbf{Volitelné statické typování:} Ačkoliv je GDScript dynamický jazyk, verze 4.x klade důraz na definici typů proměnných (např. \texttt{var health: int}). To zvyšuje bezpečnost kódu, umožňuje lepší našeptávání v editoru a zvyšuje výkon aplikace.
-	\item \textbf{Klíčové slovo @export:} Umožňuje vystavit proměnné ze skriptu přímo do grafického editoru (Inspektoru). Designér tak může upravovat parametry hry (síla útoku, rychlost pohybu) bez nutnosti zasahovat do zdrojového kódu.
-	\item \textbf{Integrace s C++ API:} GDScript má přímý přístup k nízkoúrovňovým funkcím enginu, jako jsou matematické operace s vektory nebo fyzikální výpočty.
+	\item \textbf{Volitelné statické typování:} Zvyšuje bezpečnost kódu a výkon aplikace.
+	\item \textbf{Klíčové slovo @export:} Umožňuje vystavit proměnné ze skriptu přímo do grafického editoru (Inspektoru).
 \end{itemize}
+
 \section{Aseprite}
 Pro tvorbu grafické stránky hry (pixel art) byl využit editor Aseprite. Jedná se o specializovaný nástroj pro tvorbu 2D spritů a animací, který je v herním průmyslu standardem pro retro grafiku.
-Mezi klíčové funkce využité v tomto projektu patří:
-\begin{itemize}
-	\item Práce s vrstvami (Layers) pro oddělení obrysů a barev.
-	\item Tvorba bezešvých textur (Seamless Tiles) pro herní mapu.
-	\item Export do formátu Sprite Sheet, který Godot Engine efektivně zpracovává při vykreslování animací.
-\end{itemize}
 
 \section{Algoritmus A* (A-Star)}
-Pro hledání cesty (pathfinding) v tahových strategiích je standardem algoritmus A*. Tento grafový algoritmus hledá nejkratší cestu mezi startem a cílem pomocí heuristické funkce, která odhaduje zbývající vzdálenost. V projektu je využita implementace \texttt{AStarGrid2D}, která je optimalizovaná přímo pro mřížkové mapy.
+Pro hledání cesty (pathfinding) v tahových strategiích je standardem algoritmus A*. V projektu je využita implementace \texttt{AStarGrid2D}, která je optimalizovaná přímo pro mřížkové mapy.
+
 
 %% ==========================================
-%% KAPITOLA 2: NÁVRH A ARCHITEKTURA
+%% KAPITOLA 2: POPIS HRY
+%% ==========================================
+\chapter{Popis hry}
+
+Tato kapitola popisuje vytvořenou hru z pohledu hráče a vysvětluje klíčová rozhodnutí učiněná během vývoje.
+
+Je to tahová strategie typu \textit{skirmish} (šarvátka) pro dva hráče. Hra se odehrává na čtvercové síti, která reprezentuje bojiště s různými typy terénu a překážkami. Každý hráč ovládá malou skupinu jednotek. Cílem hry je taktickou převahou eliminovat všechny jednotky soupeře. Hra končí v momentě, kdy jeden z hráčů přijde o svou poslední jednotku.
+
+
+
+\section{Adaptace pravidel a odlišnosti od předlohy}
+Ačkoliv herní koncept vychází z pravidel figurkové hry \textit{Warhammer Warcry}, přímá konverze fyzické hry do digitální podoby vyžadovala řadu designových změn a zjednodušení. Cílem nebylo vytvořit věrnou kopii 1:1, ale využít výhod, které digitální prostředí nabízí.
+
+\subsection{Přechod od spojitého prostoru k diskrétnímu}
+Nejvýraznější změnou je systém pohybu. Původní stolní předloha se odehrává ve spojitém prostoru, kde hráči měří vzdálenosti fyzickým metrem. Pro účely této práce byl prostor diskretizován do čtvercové mřížky (gridu). Toto rozhodnutí přináší několik výhod:
+\begin{itemize}
+    \item \textbf{Jednoznačnost:} Odpadají spory o to, zda je figurka "ještě v dosahu".
+    \item \textbf{Algoritmizace:} Mřížka umožňuje snadnou implementaci pathfinding algoritmu A* a výpočet vzdáleností pomocí Manhattanské metriky.
+    \item \textbf{Přehlednost:} Hráč okamžitě vidí (díky vizuálnímu overlayi), kam až může jeho jednotka dojít.
+\end{itemize}
+
+\subsection{Automatizace herních mechanismů}
+Zatímco ve stolní verzi musí hráči ručně házet kostkami, počítat výsledky a kontrolovat tabulky zranění, digitální verze tyto procesy automatizuje. Hra v každém kroku sama validuje pravidla (např. Line of Sight pomocí Bresenhamova algoritmu) a okamžitě aplikuje výsledky soubojů. Tím se eliminuje lidská chyba a zrychluje se průběh herního kola.
+
+\section{Průběh herního kola}
+Hra je rozdělena na kola (Rounds). Každé kolo se skládá ze dvou hlavních fází: fáze iniciativy a fáze akcí.
+
+\subsection{Fáze iniciativy}
+Na rozdíl od klasických her jako šachy, kde se hráči střídají fixně, využívá tento projekt prvek náhody pro určení pořadí. Na začátku kola proběhne \uv{hod kostkami} (vizuálně reprezentovaný v UI). Hráč, kterému padne nejméně stejných hodnot, získává právo prvního tahu.
+
+\subsection{Fáze akcí (Turn)}
+Jakmile je určeno pořadí, hráči se střídají v aktivaci svých jednotek. Hráč může s aktivní jednotkou provést následující operace:
+\begin{enumerate}
+    \item \textbf{Pohyb:} Jednotka se přesune o počet polí definovaný její statistikou. Pohyb spotřebuje 1 akční bod.
+    \item \textbf{Útok:} Pokud je nepřítel v dosahu a je na něj vidět, jednotka může zaútočit. Útok spotřebuje 1 akční bod.
+    \item \textbf{Vyčkávání (Wait):} Hráč může tah ukončit předčasně. Tato akce spotřebuje akční bod a předá tah soupeři, ale jednotka zůstane aktivní pro budoucí kola.
+    \item \textbf{Disengage (Odpoutání se):} Pokud se jednotka nachází v bezprostřední blízkosti nepřítele (sousední políčko), je považována za vázanou v boji. Její maximální pohyb je pro tento tah penalizován (omezen na fixní vzdálenost 3 polí). Tato mechanika simuluje taktickou obtížnost bezpečného ústupu od protivníka.
+\end{enumerate}
+
+
+\begin{figure}[h!]
+	\centering
+	 \includegraphics[width=0.9\textwidth]{image/gamescreen.png} 
+	% TODO: Vlož screenshot ze hry!
+	\caption{Ukázka herní plochy s rozmístěnými jednotkami a překážkami.}
+	\label{fig:gameplay_main}
+\end{figure}
+
+
+%% ==========================================
+%% KAPITOLA 3: NÁVRH A ARCHITEKTURA
 %% ==========================================
 \chapter{Návrh a architektura aplikace}
 
-Tato kapitola popisuje vnitřní strukturu projektu, organizaci herních objektů a vztahy mezi nimi.
+Tato kapitola popisuje vnitřní strukturu projektu, organizaci herních objektů a vztahy mezi nimi. Důraz je kladen na modularitu systému a využití návrhových vzorů, které usnadňují budoucí rozšiřitelnost aplikace.
 
-\section{Struktura herní scény}
-\label{sec:struktura_sceny}
-Základem projektu je hlavní scéna \texttt{Game.tscn}, která funguje jako kořenový uzel a sdružuje herní logiku, mapu a uživatelské rozhraní. Organizační struktura využívá systém rodič-potomek, což je klíčové pro správné fungování transformací a relativních cest ve skriptech.
 
-Níže uvedený seznam zobrazuje hierarchii uzlů v projektu (v závorce je uveden typ nebo připojený skript):
+\section{Volba vývojového prostředí}
+Pro realizaci projektu byl jako hlavní nástroj zvolen herní engine Godot (verze 4.x). K tomuto rozhodnutí vedlo několik klíčových faktorů, které tento engine zvýhodňují oproti konkurenčním řešením specificky pro potřeby 2D tahové strategie:
 
 \begin{itemize}
-	\item \textbf{Game} (Root Node)
-	\begin{itemize}
-		\item \textbf{TileMap} -- \textit{Vykreslování herního světa}
-		\item \textbf{MovementOverlay} -- \textit{Vrstva pro zobrazení dosahu pohybu}
-		\item \textbf{AttackOverlay} -- \textit{Vrstva pro zobrazení dosahu útoku}
-		\item \textbf{TurnManager} (\texttt{turn\_queue.gd}) -- \textit{Správce tahů a pravidel hry}
-		\item \textbf{Players} (Kontejnery pro hráče)
-		\begin{itemize}
-			\item player1 (\texttt{player.gd})
-			\item player2 (\texttt{player.gd})
-		\end{itemize}
-		\item \textbf{Unit} (Kontejner pro jednotky ve scéně)
-		\begin{itemize}
-			\item Scout\_P1 (\texttt{scout.gd})
-			\item Scout\_P2 (\texttt{scout.gd})
-		\end{itemize}
-		\item \textbf{CanvasLayer} (Uživatelské rozhraní)
-		\begin{itemize}
-			\item UnitStatPopup (\texttt{popupmenu.gd}) -- \textit{Informační okno jednotky}
-			\item Initiative (\texttt{initiative.gd}) -- \textit{Panel iniciativy}
-		\end{itemize}
-	\end{itemize}
+    \item \textbf{Dedikovaný 2D engine:} Na rozdíl od mnoha jiných enginů, které simulují 2D prostor v 3D světě, Godot pracuje s pravými 2D souřadnicemi. To výrazně zjednodušuje výpočty pohybu na mřížce a práci s pixel-art grafikou.
+    \item \textbf{Architektura uzlů (Nodes):} Hierarchický systém scén v Godotu je ideální pro objektový návrh deskové hry. Každá jednotka, políčko mapy nebo prvek UI může být samostatný uzel s vlastním skriptem, což usnadňuje správu kódu.
+    \item \textbf{Jazyk GDScript:} Vestavěný skriptovací jazyk umožňuje velmi rychlé prototypování herní logiky a algoritmů bez zbytečné složitosti kompilovaných jazyků.
 \end{itemize}
+
+
+\section{Hierarchie herní scény}
+Základem projektu je hlavní scéna \texttt{Game.tscn}, která funguje jako kořenový uzel (Root Node). Organizační struktura využívá systém rodič-potomek, což je v enginu Godot klíčové pro správné fungování transformací (pozicování) a relativních cest ve skriptech.
+
+Rozvržení uzlů přesně kopíruje logické vrstvy aplikace (od pozadí po popředí):
+
+\begin{figure}[H]
+    \centering
+     \includegraphics[width=0.5\textwidth]{image/hierarchie.png} 
+    \caption{Hierarchie uzlů v hlavní herní scéně (Scene Tree).}
+    \label{fig:scene_tree}
+\end{figure}
+
+\begin{enumerate}
+    \item \textbf{TileMap (Prostředí):} Nejnižší vrstva obsahující vizuální reprezentaci mapy a data o terénu (zdi, podlaha).
+    
+    \item \textbf{MovementOverlay \& AttackOverlay:} Dvě samostatné vrstvy pro vizualizaci herních mechanik. Slouží k vykreslování modrých (pohyb) a červených (útok) políček nad mapou.
+
+        \item \textbf{TurnManager:} Neviditelný řídící uzel. Neobsahuje grafiku, ale drží hlavní skript \texttt{turn\_queue.gd}, který řídí pravidla hry.
+    
+    \item \textbf{BluePlayer \& RedPlayer:} Uzly typu \texttt{Player}, které fungují jako kontejnery. Každý z nich v sobě drží své podřízené jednotky (\texttt{Unit}). Tím je jasně definováno vlastnictví a zjednodušuje se procházení smyčkou "přes všechny moje jednotky".
+    
+    
+    \item \textbf{CanvasLayer (UI):} Vrstva uživatelského rozhraní, která je vykreslována nezávisle na kameře. Obsahuje tři hlavní pod-systémy:
+    \begin{itemize}
+        \item \textbf{TurnIndicator:} Zobrazuje, kdo je na tahu.
+        \item \textbf{Initiative:} Řídí vizualizaci hodů kostkou na začátku kola.
+        \item \textbf{UnitStatPopup:} Informační okno se statistikami jednotky.
+    \end{itemize}
+\end{enumerate}
+
+
+
+\section{Architektura řízení hry (Core Loop)}
+Jádro herní logiky je postaveno na úzké spolupráci tří klíčových tříd, které tvoří páteř celého systému. Tuto strukturu lze označit jako centrální řídící trojúhelník:
+
+
+\begin{enumerate}
+    \item \textbf{TurnManager (Orchestrátor):} 
+    Tato třída funguje jako mozek hry. Nedrží data o konkrétních jednotkách, ale spravuje stavy hry (čí je tah, fáze iniciativy, fáze akce). Rozhoduje, který hráč je na řadě, a předává mu řízení.
+    
+    \item \textbf{Player (Správce zdrojů):} 
+    Představuje abstrakci hráče. Jeho úkolem není řešit pohyb (to dělá Unit) ani pravidla kola (to dělá TurnManager), ale spravovat své "zdroje" – tedy seznam svých živých jednotek a výsledky hodů na iniciativu. Funguje jako prostředník mezi globálním manažerem a konkrétními figurkami.
+    
+    \item \textbf{Unit (Výkonná jednotka):} 
+    Třída, která reálně provádí akce v herním světě (pohyb, útok). Je to koncový bod architektury. Unit neví, čí je kolo, pouze ví, že byla aktivována a má vykonat příkaz.
+\end{enumerate}
+
+\subsection{Tok řízení (Control Flow)}
+Interakce mezi těmito komponentami je cyklická:
+\begin{enumerate}
+    \item \texttt{TurnManager} vybere aktivního \texttt{Player}.
+    \item \texttt{Player} poskytne seznam dostupných \texttt{Unit}.
+    \item Hráč (uživatel) klikne na \texttt{Unit}, čímž ji aktivuje.
+    \item \texttt{Unit} vykoná akci (např. pohyb) a pomocí signálu  oznámí \texttt{TurnManageru}, že akce skončila.
+    \item \texttt{TurnManager} vyhodnotí situaci a případně předá tah druhému hráči.
+\end{enumerate}
+
+
+\section{Komunikace mezi komponentami}
+Aby byl kód modulární a jednotlivé části na sobě nebyly tvrdě závislé (tight coupling), využívá architektura návrhový vzor **Observer**, který je v Godotu implementován pomocí **signálů**.
+
+Tento přístup umožňuje oddělit herní logiku od vizualizace:
+\begin{itemize}
+    \item \textbf{Jednotka $\rightarrow$ Manažer:} Když jednotka dokončí pohyb, nevysílá příkaz "přepni tah", ale pouze emituje signál \texttt{movement\_finished}. Je na manažerovi hry (\texttt{TurnManager}), jak s touto informací naloží.
+    \item \textbf{Jednotka $\rightarrow$ UI:} Po kliknutí na jednotku je emitován signál \texttt{unit\_selected}. UI manažer tento signál zachytí a aktualizuje informační panel, aniž by jednotka musela vědět o existenci nějakého panelu.
+\end{itemize}
+
+\section{Správa vlastnictví a hierarchie hráčů}
+Hra implementuje striktní hierarchii vlastnictví pro rozlišení, které jednotky patří kterému hráči.
+Ve scéně existují dva hlavní uzly typu \texttt{Player} (např. \textit{RedPlayer} a \textit{BluePlayer}). Každý z nich funguje jako kontejner:
+
+\begin{itemize}
+    \item \textbf{Správa jednotek:} Jednotky jsou přímými potomky uzlu hráče. Při startu hry skript \texttt{player.gd} projde své potomky a zaregistruje je do pole \texttt{units}.
+    \item \textbf{Dice Pool:} Každý hráč si drží svá data o hodech na iniciativu.
+\end{itemize}
+
+Toto uspořádání zjednodušuje logiku střídání tahů – manažer hry pouze přepne aktivního hráče a automaticky tím získá přístup k jeho sadě jednotek.
 
 \section{Objektový návrh a dědičnost}
-Architektura kódu je postavena na principu dědičnosti, což umožňuje snadné rozšiřování hry o nové typy jednotek bez nutnosti přepisovat základní logiku.
+Pro zajištění snadné rozšiřitelnosti (např. přidání nových typů postav) je využita dědičnost.
 
-\subsection{Třída Unit}
-Základní třída \texttt{Unit} (soubor \texttt{unit.gd}) definuje společné vlastnosti všech postav. Obsahuje:
+\subsection{Abstraktní třída Unit}
+Základním stavebním kamenem je třída \texttt{Unit}. Tato třída definuje společné chování pro všechny entity na bojišti:
 \begin{itemize}
-	\item \textbf{Atributy:} Zdraví (\texttt{health\_points}), pohyb (\texttt{movement\_points}), útok (\texttt{attack}).
-	\item \textbf{Signály:} \texttt{movement\_finished}, \texttt{no\_actions\_left} pro komunikaci s manažerem hry.
+    \item Pohyb po křivce (Tweening).
+    \item Detekci kliknutí (InputEvent).
+    \item Správu akčních bodů.
 \end{itemize}
 
-\subsection{Specializace - Třída Scout}
-Konkrétní jednotky, jako je Průzkumník (soubor \texttt{scout.gd}), dědí ze třídy \texttt{Unit}. V metodě \texttt{\_ready()} přepisují základní statistiky:
-
-\begin{lstlisting}[style=Python, caption={Ukázka dědičnosti ve třídě Scout}]
-extends Unit
-class_name Scout
-
-func _ready():
-	# Nastavení statistik specifických pro Scouta
-	movement_points = 6
-	health_points = 8
-	toughness = 3
-	type = "Scout"
-\end{lstlisting}
+\subsection{Specializace}
+Konkrétní typy jednotek, jako je například Průzkumník (\texttt{Scout}), dědí ze základní třídy. Díky dědičnosti není nutné v nových jednotkách znovu programovat pohyb či boj. Potomek pouze v metodě \texttt{\_ready()} přepíše výchozí hodnoty statistik (viz Datový model v kapitole 4) a případně upraví vizuální stránku.
 
 %% ==========================================
-%% KAPITOLA 3: IMPLEMENTACE
+%% KAPITOLA 4: IMPLEMENTACE 
 %% ==========================================
 \chapter{Implementace herních mechanik}
 
-Tato kapitola detailně popisuje programová řešení klíčových prvků hry. Zaměřuje se na algoritmy pro správu tahů, výpočet pohybu v mřížce a matematický model soubojového systému včetně řešení viditelnosti (Line of Sight).
+Tato kapitola analyzuje klíčové technické výzvy, které vyvstaly během vývoje, a popisuje zvolená algoritmická řešení.
 
-\section{Řízení herní smyčky (Turn System)}
-Jádrem herní logiky je skript \texttt{turn\_queue.gd}, který funguje jako centrální stavový automat. Hra se dělí na kola, která se skládají z tahů jednotlivých hráčů.
+\section{Grafické podklady (Assets)}
+\label{sec:grafika}
 
-\subsection{Iniciativa}
-Pořadí hráčů není fixní, ale určuje se na začátku každého kola pomocí systému iniciativy. Každý hráč disponuje sadou virtuálních kostek (reprezentovaných polem \texttt{dice\_pool} ve třídě \texttt{Player}).
+Před samotným programováním logiky bylo nutné připravit grafické podklady. Hra využívá styl \textit{pixel art} s rozlišením mřížky 16x16 pixelů, což je standard pro retro 2D hry.
 
-Metoda \texttt{roll\_initiative\_dice()} vygeneruje pro každou kostku náhodnou hodnotu v rozsahu 1–6. Hráč s nejnižším počtem stejných hodnot získává právo prvního tahu. Tento prvek náhody nutí hráče adaptovat strategii na každé nové kolo.
+\subsection{TileSet (Sada dlaždic)}
+Pro vykreslení herního světa není použit jeden velký obrázek celé mapy, což by bylo paměťově náročné, ale tzv. \textbf{TileSet}. Jedná se o jeden texturový atlas (spritesheet), který obsahuje všechny varianty terénu (tráva, hlína, kamenné zdi, voda) naskládané vedle seba.
 
-\section{Pohyb a Pathfinding}
-Pohyb jednotek po herní ploše je realizován pomocí grafového algoritmu A* (A-Star), který hledá nejkratší cestu mezi startovní a cílovou dlaždicí s ohledem na překážky.
-\clearpage
-\subsection{Konfigurace navigační mřížky}
-V projektu je využit uzel \texttt{AStarGrid2D}, který je optimalizován pro mřížkové mapy. Při inicializaci (\texttt{\_ready}) se graf synchronizuje s vrstvou \texttt{TileMap}:
+Godot Engine tento obrázek virtuálně rozřeže na čtverce o velikosti 16x16 bodů. Každému políčku je přiděleno unikátní ID souřadnice v atlasu. Díky tomu je mapa v paměti uložena pouze jako pole čísel (referencí na ID dlaždice), nikoliv jako obrovská bitmapa.
 
-\begin{lstlisting}[style=Python, caption={Inicializace A* mřížky v turn\_queue.gd}]
-astar_grid = AStarGrid2D.new()
-astar_grid.region = tile_map.get_used_rect()
-astar_grid.cell_size = Vector2(16, 16)
-# Zákaz diagonálního pohybu pro zachování čtvercové metriky
-astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-astar_grid.update()
+\begin{figure}[H]
+    \centering
+
+    \includegraphics[width=0.6\textwidth]{image/tileset.png}
+    \caption{Použitý TileSet (atlas). Z jednoho obrázku jsou poskládány všechny variace prostředí. Všimněte si organizace do mřížky.}
+    \label{fig:tileset_packed}
+\end{figure}
+
+\subsection{Sprity jednotek}
+Zatímco prostředí je statické, postavy jsou dynamické objekty. Grafika jednotek je řešena pomocí samostatných textur (Spritů).
+Na rozdíl od TileSetu, který je "přilepen" k mřížce, uzel \texttt{Sprite2D} umožňuje plynulý pohyb po sub-pixelech (viz interpolace pohybu v sekci \ref{sec:pohyb}). Každá jednotka (např. Scout) má svou vizuální reprezentaci, která je vycentrována (offset) tak, aby nohy postavy stály přesně uprostřed herního políčka.
+
+\begin{figure}[H]
+    \centering
+    % Tady vlož screenshot tvých jednotek (třeba Scouta a nějaké jiné)
+    \includegraphics[width=0.4\textwidth]{image/showcase.png}
+    \caption{Detail spritů herních jednotek.}
+    \label{fig:unit_sprites}
+\end{figure}
+
+
+\section{Návrh mapy a datové vrstvy}
+Základem herního prostředí je mřížková mapa vytvořená pomocí systému \texttt{TileMapLayer}. V Godotu 4 neslouží tento systém pouze k vykreslování grafiky, ale funguje i jako nositel důležitých herních dat.
+
+\subsection{Konfigurace TileSetu}
+Pro mapu byl vytvořen vlastní \texttt{TileSet}. Aby bylo možné algoritmicky rozlišit, která políčka jsou průchozí (podlaha) a která tvoří překážku (zdi, propasti), byla využita funkce \textbf{Custom Data Layers}.
+
+Byla definována booleovská vrstva s názvem \texttt{Walkable}.
+\begin{itemize}
+    \item \textbf{True (Průchozí):} Přiřazeno dlaždicím podlahy a trávy.
+    \item \textbf{False (Neprůchozí):} Přiřazeno dlaždicím zdí, stromů a vody.
+\end{itemize}
+
+Toto nastavení umožňuje oddělit vizuální stránku od logické. Programátor nemusí řešit, jak konkrétní zeď vypadá, zajímá ho pouze datový atribut na daných souřadnicích.
+
+\begin{figure}[H]
+    \centering
+    % Tady vlož screenshot z editoru, kde je v inspektoru vidět "Custom Data"
+    \includegraphics[width=0.85\textwidth]{image/customdata.png}
+    \caption{Editor TileSetu v Godotu. V pravém panelu je vidět nastavení vlastnosti "Walkable" pro vybranou dlaždici zdi (hodnota false).}
+    \label{fig:tileset_editor}
+\end{figure}
+
+\subsection{Přístup k datům v kódu}
+Díky tomuto přístupu je kontrola průchodnosti v GDScriptu velmi efektivní. Není potřeba počítat fyzikální kolize. Místo toho se kód dotáže přímo mapových dat na konkrétní souřadnici mřížky.
+
+Níže uvedená ukázka demonstruje, jak třída \texttt{TurnManager} získává informace o terénu:
+
+\begin{lstlisting}[style=Python, caption={Čtení Custom Data z mapy}]
+# Získání datové buňky na souřadnicích (x, y)
+var tile_data = tile_map.get_cell_tile_data(Vector2i(x, y))
+
+# Pokud buňka existuje a má nastaveno Walkable na true, je průchozí
+if tile_data and tile_data.get_custom_data("Walkable"):
+    return true
+else:
+    return false
 \end{lstlisting}
 
-Byla zvolena **Manhattanská metrika** (pohyb pouze ve směru os X a Y), což zjednodušuje počítání vzdálenosti pro hráče – jeden krok vždy stojí jeden akční bod.
+Tento systém je využit jak při generování navigační sítě pro A* (viz sekce 4.2), tak při kontrole viditelnosti pro střelbu (Bresenhamův algoritmus).
 
-\subsection{Interpolace pohybu (Tweening)}
-Samotná změna pozice jednotky není ve hře okamžitá. Aby byl pohyb vizuálně plynulý, využívá se objekt \texttt{Tween}, který provádí lineární interpolaci souřadnic v čase.
+\section{Datový model a atributy jednotek}
+\label{sec:datovy_model}
+Před popisem samotných herních mechanismů je nutné definovat datovou strukturu herních objektů. Každá jednotka ve hře je instancí třídy, která nese sadu parametrů ovlivňujících její chování v boji i při pohybu. Tyto atributy jsou definovány v základní třídě \texttt{Unit} a upravovány v jejích potomcích (např. třída \texttt{Scout}).
 
-Metoda \texttt{move\_along\_path} ve třídě \texttt{Unit} přijímá pole bodů cesty a postupně mezi nimi animuje sprite jednotky:
+Klíčové atributy zahrnují:
+\begin{itemize}
+    \item \textbf{Health Points (HP):} Představují celkovou vitalitu jednotky. Při snížení hodnoty na 0 je jednotka vyhodnocena jako zničená a následně odstraněna z herní scény.
+    \item \textbf{Movement Points:} Maximální vzdálenost (v počtu polí), kterou může jednotka urazit během jednoho tahu.
+    \item \textbf{Attack:} Kvantifikuje objem útoku. Číselná hodnota odpovídá počtu kostek, kterými se hází při vyhodnocení souboje.
+    \item \textbf{Far:} Definuje maximální efektivní dostřel jednotky (vyjádřeno v počtu políček mřížky).
+    \item \textbf{Strength (Síla) \& Toughness (Odolnost):} Dvojice protichůdných atributů (ofenzivní vs. defenzivní). Jejich vzájemným porovnáním se určuje obtížnost hodu na zásah.
+    \item \textbf{Hit \& Crit:} Konstanty definující výši způsobeného poškození. \textit{Hit} se aplikuje při standardním zásahu, zatímco \textit{Crit} se aplikuje při padnutí hodnoty 6 na hrací kostce.
+\end{itemize}
 
-\begin{lstlisting}[style=Python, caption={Plynulý pohyb pomocí Tween (unit.gd)}]
+\section{Navigace v herním prostoru}
+Jedním ze základních požadavků tahové strategie je schopnost jednotek inteligentně se pohybovat v prostředí plném překážek. Bylo nutné implementovat systém, který nejen najde cestu z bodu A do bodu B, ale také zohlední terén a pohybový limit jednotky.
+
+\subsection{Pathfinding (Algoritmus A*)}
+Pro řešení problému hledání nejkratší cesty v grafu byl implementován algoritmus A* (A-Star). Volba padla na tento algoritmus pro jeho efektivitu a schopnost využití heuristické funkce k optimalizaci vyhledávání.
+V rámci Godot Enginu byla využita třída \texttt{AStarGrid2D}, která je optimalizována přímo pro mřížkové mapy. Tím odpadla nutnost manuální konstrukce grafu sousednosti.
+Pro metriku vzdálenosti byla zvolena **Manhattanská vzdálenost** (pohyb pouze ortogonálně), což odpovídá pravidlům deskové předlohy.
+
+\subsection{Vizuální interpolace pohybu}
+Okamžitá změna souřadnic jednotky (teleportace) by působila nepřirozeně a ztěžovala by hráči sledování průběhu tahu. Pro zajištění plynulé vizualizace byla nasazena technika interpolace (Tweening). 
+Místo skokové změny pozice se využívá objekt \texttt{Tween}, který v čase interpoluje globální pozici spritu mezi jednotlivými body vypočítané cesty.
+
+\begin{lstlisting}[style=Python, caption={Interpolace pohybu pomocí Tween}]
 func move_along_path(path: Array[Vector2]) -> void:
-	if path.is_empty(): return
-	
-	actions -= 1
+	# ... (ošetření vstupů)
 	var tween = create_tween()
 	
 	for point in path:
-		# Animace přesunu na další bod cesty trvá 0.25 sekundy
+		# Lineární interpolace s vyhlazením pro přirozený dojem
 		tween.tween_property(self, "global_position", point, 0.25)\
 			.set_trans(Tween.TRANS_SINE)\
 			.set_ease(Tween.EASE_IN_OUT)
 	
-	# Callback po dokončení pohybu
 	tween.tween_callback(Callable(self, "_on_move_finished"))
 \end{lstlisting}
 
-\section{Bojový systém}
-Boj je interakcí mezi útočníkem a obráncem, která podléhá pravidlům o dosahu, viditelnosti a statistikách jednotek. 
+Výsledkem je plynulá animace přesunu, díky které hráč neztrácí orientaci v prostoru a může snadno vizuálně sledovat trasu, kterou jednotka urazila.
 
-\subsection{Algoritmus vyhodnocení útoku}
-Samotný průběh boje je determinován porovnáním statistik útočníka a obránce. Systém nejprve určí prahovou hodnotu pro úspěšný zásah (Target Number) na základě vztahu mezi silou útočníka (\texttt{Strength}) a odolností obránce (\texttt{Toughness}).
-
-Platí následující pravidla pro určení hodnoty potřebné k zásahu:
-\begin{itemize}
-	\item Pokud $\texttt{Strength} > \texttt{Toughness}$: Útočník má výhodu, pro zásah stačí hodnota \textbf{3+}.
-	\item Pokud $\texttt{Strength} = \texttt{Toughness}$: Síly jsou vyrovnané, standardní hodnota pro zásah je \textbf{4+}.
-	\item Pokud $\texttt{Strength} < \texttt{Toughness}$: Obránce má převahu, útočník musí hodit \textbf{5+}.
-\end{itemize}
-
-Následně proběhne simulace hodu $N$ šestistěnnými kostkami, kde $N$ odpovídá atributu \texttt{Attack} útočníka. Každá kostka se vyhodnocuje samostatně:
-
-\begin{enumerate}
-	\item \textbf{Neúspěch:} Hodnota kostky je nižší než stanovená prahová hodnota. Žádné poškození se neaplikuje.
-	\item \textbf{Zásah (Hit):} Hodnota je rovna nebo vyšší než práh, ale nižší než 6. Je uděleno poškození ve výši atributu \texttt{Hit}.
-	\item \textbf{Kritický zásah (Crit):} Na kostce padla hodnota 6. Místo standardního poškození se aplikuje hodnota \texttt{Crit}, která reprezentuje silnější úder.
-\end{enumerate}
-
-Celkové poškození je součtem výsledků všech úspěšných hodů.
-
-\subsection{Atributy jednotek}
-Každá jednotka je definována sadou parametrů, které ovlivňují výsledek boje. Tyto atributy jsou definovány ve třídě \texttt{Unit} a upravovány v potomcích (např. \texttt{Scout}).
-
-\begin{itemize}
-	\item \textbf{Health Points (HP):} Představují celkovou vitalitu jednotky. Při snížení hodnoty na 0 je jednotka vyhodnocena jako zničená a následně odstraněna z herní scény.
-	\item \textbf{Attack:} Kvantifikuje objem útoku. Číselná hodnota odpovídá počtu kostek, kterými se hází při vyhodnocení souboje.
-	\item \textbf{Far:} Definuje maximální efektivní dostřel jednotky (vyjádřeno v počtu políček mřížky).
-	\item \textbf{Strength (Síla) \& Toughness (Odolnost):} Dvojice protichůdných atributů (ofenzivní vs. defenzivní). Jejich vzájemným porovnáním se určuje obtížnost hodu na zásah.
-	\item \textbf{Hit \& Crit:} Konstanty definující výši způsobeného poškození. \textit{Hit} se aplikuje při standardním zásahu, zatímco \textit{Crit} se aplikuje při padnutí hodnoty 6 na hrací kostce.
-\end{itemize}
+\section{Bojový systém a detekce viditelnosti}
+Implementace soubojů vyžadovala vyřešení dvou problémů: jak určit validitu útoku (zda útočník vidí na cíl) a jak spravedlivě vyhodnotit výsledek střetu na základě statistik definovaných v datovém modelu.
 
 \subsection{Detekce viditelnosti (Line of Sight)}
-Aby mohla jednotka zaútočit na dálku, musí mít na cíl přímou viditelnost. Protože hra nefunguje na fyzikálním enginu, ale na mřížce, nemohl být použit standardní \texttt{RayCast2D}.
+Pouhé ověření vzdálenosti k cíli není pro validaci útoku dostačující, neboť herní mapa obsahuje neprůchozí překážky (zdi). Jelikož hra nepracuje s fyzikálním enginem a kolizními tvary pro zdi, nebylo možné použít standardní \texttt{RayCast2D}.
+Jako řešení byl zvolen **Bresenhamův algoritmus** pro rasterizaci úsečky. Tento algoritmus umožňuje matematicky simulovat přímku v diskrétní mřížce a efektivně kontrolovat, zda některá z buněk na spojnici mezi útočníkem a obráncem neobsahuje příznak \textit{non-walkable}.
 
-Místo toho byla implementována vlastní variace **Bresenhamova algoritmu**. Tento algoritmus matematicky simuluje přímku mezi dvěma body v mřížce a kontroluje, zda některá z buněk na této přímce neobsahuje překážku (dle vlastnosti \textit{Custom Data: Walkable} v TileSetu).
-
-Metoda \texttt{has\_line\_of\_sight\_tile} prochází buňky od útočníka k cíli. Pokud narazí na zeď, vrátí \texttt{false} a útok je znemožněn.
-\clearpage
-
-\begin{lstlisting}[style=Python, caption={Algoritmus kontroly viditelnosti (zjednodušeno)}]
+\begin{lstlisting}[style=Python, caption={Kontrola viditelnosti (Bresenham)}]
 func has_line_of_sight_tile(start: Vector2i, end: Vector2i) -> bool:
 	var dx = abs(end.x - start.x)
 	var dy = -abs(end.y - start.y)
 	var err = dx + dy
+	var e2
 	
 	while true:
-		# Pokud je na aktuální dlaždici překážka, není vidět
+		# Kontrola datové vrstvy mapy na přítomnost překážky
 		var data = tile_map.get_cell_tile_data(start)
 		if data and not data.get_custom_data("Walkable"):
-			return false
+			return false 
 			
 		if start == end: break
 		
-		# Výpočet dalšího kroku v mřížce
-		var e2 = 2 * err
+		# Výpočet dalšího bodu na mřížce
+		e2 = 2 * err
 		if e2 >= dy:
 			err += dy
 			start.x += sx
@@ -615,64 +555,68 @@ func has_line_of_sight_tile(start: Vector2i, end: Vector2i) -> bool:
 	return true
 \end{lstlisting}
 
-\section{Vizualizace a uživatelské rozhraní (UI)}
-Komunikace hry s hráčem probíhá ve dvou rovinách: přímo v herním prostoru (zvýraznění možností pohybu) a v statické vrstvě rozhraní (HUD).
+Implementace tohoto algoritmu zajišťuje férovost hry – hráč nemůže zasáhnout cíle skryté za zdí či překážkou, což odpovídá intuitivnímu očekávání chování ve fyzickém prostoru.
 
-\subsection{Interaktivní vrstvy (Overlays)}
-Pro vizualizaci taktických možností, jako je dosah pohybu nebo útoku, hra nevyužívá drahé instancování objektů pro každé políčko. Místo toho jsou použity dedikované vrstvy typu \texttt{TileMapLayer}:
+\subsection{Algoritmus vyhodnocení útoku}
+Samotný průběh boje je determinován porovnáním statistik útočníka a obránce. Systém nejprve určí prahovou hodnotu pro úspěšný zásah (Target Number) na základě vztahu mezi silou útočníka (\textit{Strength}) a odolností obránce (\textit{Toughness}).
+
+Platí následující pravidla pro určení hodnoty potřebné k zásahu:
 \begin{itemize}
-	\item \textbf{MovementOverlay:} Zobrazuje modře políčka, na která může jednotka dojít.
-	\item \textbf{AttackOverlay:} Zobrazuje červeně políčka, která jsou v dosahu útoku.
+    \item \textbf{Strength > Toughness:} Útočník má výhodu, pro zásah stačí hodnota 3+.
+    \item \textbf{Strength = Toughness:} Síly jsou vyrovnané, standardní hodnota pro zásah je 4+.
+    \item \textbf{Strength < Toughness:} Obránce má převahu, útočník musí hodit 5+.
 \end{itemize}
 
-Tyto vrstvy jsou ve stromu scény umístěny nad základní mapou, ale pod jednotkami. Při výběru jednotky skript \texttt{turn\_queue.gd} vypočítá validní souřadnice (pomocí A* pro pohyb nebo Manhattanské vzdálenosti pro útok) a na příslušné souřadnice v overlay vrstvě umístí dlaždici s poloprůhlednou texturou:
+Následně proběhne simulace hodu $N$ šestistěnnými kostkami, kde $N$ odpovídá atributu \textit{Attack} útočníka. Každá kostka se vyhodnocuje samostatně:
+\begin{enumerate}
+    \item \textbf{Neúspěch:} Hodnota kostky je nižší než stanovená prahová hodnota. Žádné poškození se neaplikuje.
+    \item \textbf{Zásah (Hit):} Hodnota je rovna nebo vyšší než práh, ale nižší než 6. Je uděleno poškození ve výši atributu \textit{Hit}.
+    \item \textbf{Kritický zásah (Crit):} Na kostce padla hodnota 6. Místo standardního poškození se aplikuje hodnota \textit{Crit}, která reprezentuje silnější úder.
+\end{enumerate}
 
-\begin{lstlisting}[style=Python, caption={Vykreslení overlaye pohybu}]
-func draw_movement_overlay(unit, reachable_points):
-	overlay_map.clear() # Smazání předchozího stavu
-	for point in reachable_points:
-		# Nastavení modré dlaždice na souřadnici
-		overlay_map.set_cell(point, SOURCE_ID, ATLAS_COORDS)
-\end{lstlisting}
+Celkové poškození je součtem výsledků všech úspěšných hodů. Tento mechanismus vnáší do hry prvek napětí a umožňuje strategické plánování rizika.
 
-Toto řešení je vysoce výkonné, protože \texttt{TileMapLayer} vykresluje všechny dlaždice v jednom draw-callu (vykreslovacím cyklu).
+\section{Vizualizace herních stavů}
+Zatímco architektura komunikace stojí na signálech (viz kapitola 3.2), samotná vizualizace pro hráče je řešena přímou manipulací s grafickými uzly.
 
-\subsection{Statické rozhraní (HUD)}
-Informační prvky, které se nemají pohybovat s kamerou (např. statistiky), jsou umístěny ve vrstvě \texttt{CanvasLayer}.
+\subsection{Vykreslování dosahu (Overlays)}
+Pro zobrazení kam se jednotka může pohnout, není efektivní instancovat stovky samostatných objektů. Místo toho je využita metoda \texttt{set\_cells\_terrain\_connect} na uzlu \texttt{TileMapLayer}. Po výběru jednotky se vypočítá pole dostupných souřadnic a tyto buňky jsou v jedné operaci přebarveny v dedikované vrstvě \texttt{MovementOverlay}.
 
-Klíčovým prvkem je skript \texttt{popupmenu.gd}, který reaguje na signál \texttt{unit\_selected}. Po kliknutí na jednotku se dynamicky načtou její aktuální statistiky do připravených textových polí (\texttt{Label}) a zobrazí se informační okno.	
-	
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{image/overlay.png}
+    \caption{Vizualizace taktických vrstev. Modré podbarvení (MovementOverlay) indikuje dostupný pohyb pro aktuální tah, zatímco červené zvýraznění (AttackOverlay) vymezuje oblast v dosahu útoku, kde je možné zasáhnout nepřítele.}
+    \label{fig:overlay_vizualizace}
+\end{figure}
 
-%% ZÁVĚR PRÁCE
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Animace UI prvků}
+Pro plynulý zážitek (tzv. "game feel") nejsou informační okna zobrazována skokově. Při zobrazení detailu jednotky (\texttt{popupmenu.gd}) je využita interpolace vlastnosti \texttt{modulate:a} (průhlednost) a \texttt{scale}, což vytváří efekt plynulého objevení (fade-in).
 \chapter*{Závěr}
 \addcontentsline{toc}{chapter}{Závěr}
 
-Cílem této závěrečné práce bylo navrhnout a naimplementovat tahovou strategickou hru v herním enginu Godot. Tento cíl byl splněn. Výsledná aplikace obsahuje funkční systém střídání tahů, pohyb jednotek po mřížce pomocí algoritmu A* a komplexní soubojový systém založený na statistikách jednotek.
+Cílem této práce bylo navrhnout a vytvořit funkční tahovou strategii typu skirmish v herním enginu Godot, která čerpá inspiraci z pravidel stolní hry Warhammer Warcry. Záměrem bylo adaptovat většinu herních mechanik fyzické předlohy pro digitální prostředí. Mohu konstatovat, že tento cíl byl splněn a výsledná aplikace obsahuje kompletní hratelné jádro hry.
 
-Během vývoje jsem si prohloubil znalosti objektově orientovaného programování v jazyce GDScript a naučil se řešit specifické problémy herního vývoje, jako je oddělení herní logiky od vizualizace nebo práce s diskrétní geometrií na mřížce.
+Výsledná aplikace demonstruje komplexní herní systém, který v sobě propojuje logiku deskových her s možnostmi moderního enginu. Podařilo se implementovat robustní systém pohybu po mřížce využívající algoritmus A* v kombinaci s plynulou vizualizací (Tweening). Plně funkční je rovněž bojový systém, který automatizuje porovnávání statistik jednotek a vyhodnocování hodů kostkou. Hra správně řeší střídání tahů včetně fáze iniciativy a pomocí systému Line of Sight (Bresenhamův algoritmus) zajišťuje férovou detekci viditelnosti přes překážky.
 
-Vytvořený projekt představuje solidní základ, na kterém lze v budoucnu stavět, ať už přidáním umělé inteligence, nebo rozšířením herního obsahu. Práce prokázala, že Godot Engine je mocným nástrojem pro tvorbu 2D her, který umožňuje efektivní vývoj i pro jednotlivce.
+Vývoj v prostředí Godot Engine pro mě představoval velkou výzvu. Vzhledem k tomu, že jsem s tímto nástrojem začínal a na internetu chyběly ucelené návody pro tvorbu specificky tohoto žánru (tahová skirmish strategie), probíhala realizace převážně formou samostudia a experimentování. Tento proces učení se za pochodu (tzv. "learning by doing") s sebou přirozeně nesl nutnost častého refactoringu a přepisování již hotových částí kódu, když jsem přišel na vhodnější způsob implementace herních mechanik. V důsledku toho lze v projektu nalézt pasáže, kde jsou podobné problémy řešeny odlišnými přístupy. Tato nekonzistence je odrazem postupného vývoje mých znalostí a hledání optimálních řešení přímo v průběhu tvorby aplikace.
+
+Projekt, ačkoliv funkční, otevírá široký prostor pro další rozvoj a obohacení herních mechanik. Do budoucna bych se rád zaměřil na zvýšení znovuhratelnosti vytvořením \textbf{širší palety herních map} a implementací \textbf{rozmanitějších úkolů} (objectives), aby každá partie nabízela odlišnou strategickou výzvu. Z technického hlediska by hru výrazně posunulo zavedení \textbf{výškových úrovní terénu} (elevation), které by do taktiky vneslo nový vertikální rozměr.
+
+Dalším logickým krokem je rozšíření herního obsahu. Současný model dvou týmů by bylo vhodné nahradit \textbf{komplexním systémem frakcí}, kde by každá strana disponovala unikátními jednotkami a speciálními schopnostmi (abilities). S tím souvisí i plánovaná mechanika \textbf{tvorby vlastní čety} (squad customization) na základě bodového systému, která by hráčům umožnila strategicky skládat tým před bitvou. Vrcholem budoucího vývoje by pak mohly být nástroje pro hráče, umožňující \textbf{vytváření vlastních frakcí a jednotek}.
+
+Tvorba této práce pro mě byla velkým osobním i odborným přínosem. Nejenže jsem si osvojil práci v moderním herním enginu a prohloubil znalost programování v jazyce GDScript, ale především jsem se naučil přemýšlet nad architekturou většího softwarového projektu. Celý proces vývoje mě navíc velmi bavil, neboť mi umožnil v praxi propojit mou dlouhodobou vášeň pro stolní hry s programováním. Schopnost rozdělit komplexní problém na menší, řešitelné celky a dotáhnout vlastní vizi do podoby funkčního produktu považuji za nejcennější zkušenost, kterou jsem během psaní práce získal.
+
+https://github.com/Dvojak/Skirmish-game
+    
 
 %% LITERATURA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{thebibliography}{99}
 	\bibitem{godot_docs} \textit{Godot Engine 4.x Documentation} [online]. Godot Engine Project, 2024 [cit. 2026-01-05]. Dostupné z: \url{https://docs.godotengine.org}
-	
 	\bibitem{gdscript_ref} \textit{GDScript reference} [online]. Godot Engine Project, 2024 [cit. 2026-01-05]. Dostupné z: \url{https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html}
-	
 	\bibitem{astar_algo} \textit{A* Search Algorithm} [online]. GeeksforGeeks, 2024 [cit. 2026-01-05]. Dostupné z: \url{https://www.geeksforgeeks.org/a-search-algorithm/}
-    
-    \bibitem{bresenham} \textit{Bresenham's line algorithm} [online]. Wikipedia, 2024 [cit. 2026-01-05]. Dostupné z: \url{https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm}
+    \bibitem{bresenham} \textit{Bresenham's line algorithm} [online]. Wikipedia, 2024 [cit. 2026-01-05]. Dostupné z: \url{https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm}
 \end{thebibliography}
 
-%% SEZNAMY OBRÁZKŮ A TABULEK
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begingroup
-    \let\clearpage\relax
-    \listoffigures
-    \vspace{2cm}
-    \listoftables
-\endgroup
 
 \end{document}
