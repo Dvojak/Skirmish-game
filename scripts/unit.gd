@@ -18,12 +18,14 @@ var attack := 3
 var hit := 4
 var crit := 6
 var type :=  "Standart"
+var alive := true
 
 
 
 
 var current_id_path: Array[Vector2] = []
 var move_speed := 100.0 
+signal died(unit)
 
 func _ready():
 	set_physics_process(true)
@@ -71,13 +73,13 @@ func _physics_process(_delta):
 				emit_signal("no_actions_left")
 			emit_signal("movement_finished")
 
+
 func apply_damage(amount: int) -> void:
 	health_points -= amount
-	print("%s dostal %d dmg. HP nyní: %d" % [self.name, amount, health_points])
+	print("%s dostal %d dmg. HP: %d" % [name, amount, health_points])
 
 	if health_points <= 0:
-		queue_free()
-		print("%s zemřel!" % name)
+		emit_signal("died", self)
 
 func is_engaged(tile_map: TileMapLayer, units_container: Node) -> bool:
 	var my_tile = tile_map.local_to_map(global_position)
@@ -98,3 +100,14 @@ func is_engaged(tile_map: TileMapLayer, units_container: Node) -> bool:
 				if tile_map.local_to_map(u.global_position) == check_tile:
 					return true
 	return false
+
+func get_sprite_texture() -> Texture2D:
+	var body := get_node_or_null("CharacterBody2D")
+	if body == null:
+		return null
+
+	var sprite := body.get_node_or_null("Sprite2D")
+	if sprite == null:
+		return null
+
+	return sprite.texture

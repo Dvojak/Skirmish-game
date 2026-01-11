@@ -12,6 +12,7 @@ class_name TurnManager
 @onready var turn_label: Label = get_node("../CanvasLayer/Initiative/Winner")
 @onready var dice_label: Label = get_node("../CanvasLayer/Initiative/DicePanel/DiceLabel")
 @onready var current_label: Label = get_node("../CanvasLayer/TurnIndicator/TurnLabel")
+@onready var combat_ui = get_node("../CanvasLayer/CombatPanel")
 
 
 
@@ -73,6 +74,9 @@ func start_round():
 
 
 func start_turn():
+	overlay_map.clear()
+	attack_overlay.clear()
+	check_game_over()
 	var current_player = players[numc_player]
 	current_label.text = current_player.name
 	current_label.show()
@@ -144,7 +148,7 @@ func _input(event):
 		if u and u in players[numc_player].units:
 			selected_unit = u
 			print("Vybral jsi jednotku:", u.type)
-
+			
 			overlay_map.clear()
 			attack_overlay.clear()
 
@@ -153,22 +157,18 @@ func _input(event):
 				show_disengage_range(u)
 				show_attack_range(u)
 			else:
+				
 				show_movement_range(u)
 				show_attack_range(u)
 
 	elif event.is_action_pressed("move") and selected_unit:
 
-	# 1️⃣ NEJDŘÍV zkus útok
 		var clicked_unit = _get_unit_under_mouse()
 		if clicked_unit and clicked_unit != selected_unit:
 			print("Klikl jsi na jednotku → pokusím se zaútočit")
 			try_attack(selected_unit, clicked_unit)
 			return
-
-	# 2️⃣ TEPRVE POTOM řeš pohyb / disengage
 		
-
-	# 3️⃣ Normální pohyb
 		var target_tile = _get_tile_under_mouse()
 		var start = tile_map.local_to_map(selected_unit.global_position)
 		var end = tile_map.local_to_map(target_tile)
@@ -232,6 +232,11 @@ func _count_singles(dice: Array[int]) -> int:
 
 
 func end_turn():
+	
+	if check_game_over():
+		return
+
+	
 	numc_player = (numc_player + 1) % players.size()
 	print("Tah hráče skončil, teď hraje:", players[numc_player].name)
 	
@@ -249,6 +254,7 @@ func end_turn():
 		else:
 			print(" Konec kola, všichni hráči dohráli.")
 			start_round()
+			
 
 func show_movement_range(unit: Unit):
 	overlay_map.clear()
@@ -402,30 +408,8 @@ func try_attack(attacker: Unit, defender: Unit):
 
 
 func start_combat(attacker: Unit, defender: Unit):
-	print(" Boj začíná:", attacker.name, "útočí na", defender.name)
-
-
-	var needed = 4
-	if attacker.strenght > defender.toughness:
-		needed = 3
-	elif attacker.strenght < defender.toughness:
-		needed = 5
-
-	print("Útočník potřebuje hodit:", needed, "nebo více")
-
-
-	for i in range(attacker.attack):
-		var roll = randi_range(1, 6)
-		print("Hod:", roll)
-
-		if roll >= needed:
-			var damage = attacker.crit if roll == 6 else attacker.hit
-			print(" Zásah! Dmg:", damage)
-			defender.apply_damage(damage)
-		else:
-			print(" Minul")
-
-	print("Boj skončil.")
+	combat_ui.start_combat(attacker, defender)
+	
 	
 func skip_unit_action():
 	if selected_unit.actions <= 0:
@@ -433,25 +417,33 @@ func skip_unit_action():
 
 	print(" Skip akce jednotky:", selected_unit.name)
 
-	# spotřebuj jednu akci
 	selected_unit.actions -= 1
 
-	# uklid overlaye
 	overlay_map.clear()
 	attack_overlay.clear()
 
-	# zruš výběr (důležité!)
 	selected_unit = null
 
 
 
-	# pokud jednotka nemá žádné akce, vyřeší se konec tahu
 	if selected_unit == null:
 		_on_finished_action()
 
+func check_game_over() -> bool:
+	for p in players:
+		var alive_units := 0
+		for u in p.units:
+			if u.health_points > 0:
+				alive_units += 1
 
-	
+		if alive_units == 0:
+			print(" Hra skončila – vyhrál hráč:", get_other_player(p).name)
+			return true
 
+	return false
 
-
-	
+func get_other_player(player: Player) -> Player:
+	for p in players:
+		if p != player:
+			return p
+	return null
