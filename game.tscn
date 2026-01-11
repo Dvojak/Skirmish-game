@@ -1,6 +1,6 @@
-[gd_scene load_steps=21 format=4 uid="uid://ysshp5tq8106"]
+[gd_scene load_steps=22 format=4 uid="uid://ysshp5tq8106"]
 
-[ext_resource type="Texture2D" uid="uid://bf72vuvnbi6no" path="res://sprites/tilemap_packed.png" id="1_drgk6"]
+[ext_resource type="Texture2D" uid="uid://vjh17eo8jmcr" path="res://sprites/some_grass.png" id="1_mfdv2"]
 [ext_resource type="Texture2D" uid="uid://efjs7di7c3am" path="res://sprites/overlay.png" id="2_eow3j"]
 [ext_resource type="Script" uid="uid://b8b0av0yde2fu" path="res://scripts/turn_queue.gd" id="3_feb5d"]
 [ext_resource type="Texture2D" uid="uid://b40ckax5qib4p" path="res://sprites/attack_overlay.png" id="3_vef74"]
@@ -8,21 +8,41 @@
 [ext_resource type="Script" uid="uid://b2ig3848p6uce" path="res://scripts/scout.gd" id="5_7jktm"]
 [ext_resource type="Script" uid="uid://cmtpafqlvqvc8" path="res://scripts/unit.gd" id="6_ryrav"]
 [ext_resource type="Script" uid="uid://15ulgwexwh3i" path="res://scripts/popupmenu.gd" id="8_j5wjh"]
-[ext_resource type="Texture2D" uid="uid://dnfbmxmy3m3nm" path="res://sprites/blueboy.png" id="8_mfdv2"]
-[ext_resource type="Texture2D" uid="uid://w4wml47cogn6" path="res://sprites/redboy.png" id="9_iotsf"]
+[ext_resource type="Texture2D" uid="uid://q35a3da11l1u" path="res://sprites/Blue_mf.png" id="8_mfdv2"]
+[ext_resource type="Texture2D" uid="uid://d23lpctyoisdd" path="res://sprites/Red_Alfonz_witch.png" id="9_iotsf"]
 [ext_resource type="Script" uid="uid://bpy607rbdym33" path="res://scripts/initiative.gd" id="10_hve3p"]
+[ext_resource type="Script" uid="uid://cps7vo6mwex8t" path="res://combat_panel.gd" id="12_iotsf"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fc0e3"]
-texture = ExtResource("1_drgk6")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iotsf"]
+texture = ExtResource("1_mfdv2")
 0:0/0 = 0
 0:0/0/custom_data_0 = true
 1:0/0 = 0
+1:0/0/custom_data_0 = true
 2:0/0 = 0
+2:0/0/custom_data_0 = true
+3:0/0 = 0
+3:0/0/custom_data_0 = true
+4:0/0 = 0
+4:0/0/custom_data_0 = true
+0:1/0 = 0
+0:1/0/custom_data_0 = true
+1:1/0 = 0
+1:1/0/custom_data_0 = true
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+4:1/0/custom_data_0 = true
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_7jktm"]
+[sub_resource type="TileSet" id="TileSet_lc2xo"]
 custom_data_layer_0/name = "Walkable"
 custom_data_layer_0/type = 1
-sources/0 = SubResource("TileSetAtlasSource_fc0e3")
+sources/0 = SubResource("TileSetAtlasSource_iotsf")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j5wjh"]
 texture = ExtResource("2_eow3j")
@@ -51,8 +71,8 @@ size = Vector2(16, 16)
 [node name="TileMap" type="Node2D" parent="."]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMap"]
-tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAD//wAAAAABAAAAAAD/////AAAAAAAAAAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAABAAEAAAABAAAAAAABAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAD//wIAAAAAAAAAAAD//wEAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAMAAAAAAAAAAAD//wMAAAAAAAAAAAD+/wIAAAAAAAAAAAD+/wEAAAAAAAAAAAD+/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD+/wAAAAAAAAAAAAD9////AAAAAAAAAAD+//7/AAAAAAAAAAD///7/AAAAAAAAAAD9/wAAAAAAAAAAAAD+////AAAAAAAAAAAAAP7/AAAAAAAAAAACAP//AAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAABAP7/AAAAAAAAAAACAP7/AAAAAAAAAAACAAIAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAABAAMAAAAAAAAAAAD//wQAAAAAAAAAAAD+/wQAAAAAAAAAAAD+/wUAAAAAAAAAAAD9/wUAAAAAAAAAAAD9/wQAAAAAAAAAAAD8/wQAAAAAAAAAAAD8/wMAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wAAAAAAAAAAAAD9//7/AAAAAAAAAAD9//3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAQAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAACAAcAAAAAAAAAAAABAAgAAAAAAAAAAAABAAcAAAAAAAAAAAABAAYAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAEAAcAAAAAAAAAAAADAAcAAAAAAAAAAAACAAgAAAAAAAAAAAACAAYAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAFAAYAAAAAAAAAAAAFAAcAAAAAAAAAAAAFAAUAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAYAAAAAAAAAAAA=")
-tile_set = SubResource("TileSet_7jktm")
+tile_map_data = PackedByteArray("AAAAAAAAAAADAAEAAAD//wAAAAADAAIAAAD/////AAACAAIAAAAAAP//AAAAAAEAAAABAP//AAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAEAAAABAAEAAAABAAAAAAABAAIAAAAEAAIAAAAAAAIAAAAEAAIAAAD//wIAAAAEAAIAAAD//wEAAAABAAEAAAAAAAEAAAABAAAAAAAAAAMAAAABAAEAAAD//wMAAAAAAAAAAAD+/wIAAAAEAAIAAAD+/wEAAAAAAAAAAAD+/wMAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wIAAAADAAIAAAD9/wEAAAAAAAAAAAD+/wAAAAAAAAAAAAD9////AAAAAAAAAAD+//7/AAABAAAAAAD///7/AAACAAEAAAD9/wAAAAAAAAEAAAD+////AAACAAAAAAAAAP7/AAAEAAAAAAACAP//AAAAAAAAAAADAP//AAAAAAAAAAADAAAAAAAAAAAAAAABAP7/AAACAAAAAAACAP7/AAAAAAEAAAACAAIAAAADAAEAAAAAAAQAAAAAAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAEAAAABAAMAAAAAAAAAAAD//wQAAAAAAAAAAAD+/wQAAAABAAEAAAD9/wQAAAAAAAAAAAD8/wQAAAAAAAEAAAD8/wMAAAACAAAAAAD8/wIAAAAAAAEAAAD8/wEAAAAAAAAAAAD8/wAAAAAAAAAAAAD9//7/AAAAAAIAAAD9//3/AAAAAAAAAAAAAP3/AAAAAAAAAAABAP3/AAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAQAAAAAAAAAAAD8////AAABAAEAAAD8//3/AAABAAEAAAD+//3/AAABAAEAAAD8//7/AAAAAAAAAAD///3/AAAAAAAAAAACAP3/AAABAAAAAAADAP3/AAAEAAAAAAADAP7/AAADAAAAAAD7//7/AAABAAAAAAD7////AAABAAAAAAD7/wAAAAACAAAAAAD7/wEAAAAAAAIAAAD7//3/AAAAAAIAAAD7/wIAAAABAAEAAAD7/wQAAAACAAIAAAD7/wMAAAACAAEAAAAEAAQAAAAAAAEAAAAEAAAAAAAAAAEAAAAEAP7/AAAAAAEAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAEAAAAEAAAAAAAEAP//AAAEAAAAAAADAPz/AAADAAEAAAD///z/AAADAAIAAAAAAPz/AAAEAAIAAAABAPz/AAAEAAIAAAACAPz/AAAEAAIAAAD9//z/AAAAAAAAAAD+//z/AAAAAAAAAAD+//v/AAAAAAEAAAD9//v/AAAAAAEAAAD8//z/AAAEAAEAAAD7//v/AAACAAAAAAD7//z/AAAAAAAAAAD8//v/AAABAAAAAAAEAP3/AAAEAAEAAAAEAPz/AAAAAAAAAAAEAPv/AAAEAAAAAAADAPv/AAABAAAAAAAAAPv/AAABAAAAAAD///v/AAABAAAAAAABAPv/AAAAAAIAAAACAPv/AAABAAAAAAA=")
+tile_set = SubResource("TileSet_lc2xo")
 
 [node name="MovementOverlay" type="Node2D" parent="."]
 
@@ -67,10 +87,10 @@ tile_set = SubResource("TileSet_hve3p")
 [node name="TurnManager" type="Node2D" parent="."]
 script = ExtResource("3_feb5d")
 
-[node name="player1" type="Node2D" parent="."]
+[node name="BluePlayer" type="Node2D" parent="."]
 script = ExtResource("4_7jktm")
 
-[node name="player2" type="Node2D" parent="."]
+[node name="RedPlayer" type="Node2D" parent="."]
 script = ExtResource("4_7jktm")
 
 [node name="Unit" type="Node2D" parent="."]
@@ -82,11 +102,11 @@ position = Vector2(24, 8)
 input_pickable = true
 script = ExtResource("5_7jktm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Unit/Scout_P1"]
-shape = SubResource("RectangleShape2D_ryrav")
-
 [node name="Sprite2D" type="Sprite2D" parent="Unit/Scout_P1"]
 texture = ExtResource("8_mfdv2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Unit/Scout_P1"]
+shape = SubResource("RectangleShape2D_ryrav")
 
 [node name="Scout_P2" type="CharacterBody2D" parent="Unit"]
 position = Vector2(-25, 8)
@@ -125,39 +145,50 @@ offset_bottom = 216.0
 
 [node name="Health" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 6
 
 [node name="Toughness" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 7
 
 [node name="Movement" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 7
 
 [node name="Strenght" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 7
 
 [node name="Attack" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 7
 
 [node name="Far" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 7
 
 [node name="Hit" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 7
 
 [node name="Crit" type="Label" parent="CanvasLayer/UnitStatPopup/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 7
 
 [node name="Initiative" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -81.0
+offset_top = -10.0
+offset_right = -41.0
+offset_bottom = 30.0
 script = ExtResource("10_hve3p")
 
 [node name="Player1" type="Label" parent="CanvasLayer/Initiative"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_font_sizes/font_size = 7
 
 [node name="Player2" type="Label" parent="CanvasLayer/Initiative"]
 layout_mode = 0
@@ -168,3 +199,79 @@ offset_bottom = 23.0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="DicePanel" type="Panel" parent="CanvasLayer/Initiative"]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 50.0
+offset_right = 122.0
+offset_bottom = 87.0
+
+[node name="DiceLabel" type="Label" parent="CanvasLayer/Initiative/DicePanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TurnIndicator" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TurnLabel" type="Label" parent="CanvasLayer/TurnIndicator"]
+layout_mode = 0
+offset_right = 99.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 7
+
+[node name="CombatPanel" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 45.0
+offset_right = 64.0
+offset_bottom = 85.0
+script = ExtResource("12_iotsf")
+
+[node name="AttackBox" type="VBoxContainer" parent="CanvasLayer/CombatPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="CanvasLayer/CombatPanel/AttackBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CombatPanel/AttackBox"]
+layout_mode = 2
+
+[node name="CenterBox" type="VBoxContainer" parent="CanvasLayer/CombatPanel"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 20.0
+offset_right = 329.0
+offset_bottom = 220.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/CombatPanel/CenterBox"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 6
+theme_override_font_sizes/bold_font_size = 6
+theme_override_font_sizes/bold_italics_font_size = 6
+theme_override_font_sizes/italics_font_size = 6
+theme_override_font_sizes/mono_font_size = 6
+bbcode_enabled = true
+
+[node name="DefenderBox" type="VBoxContainer" parent="CanvasLayer/CombatPanel"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 1.0
+offset_right = 99.0
+offset_bottom = 41.0
+
+[node name="Label" type="Label" parent="CanvasLayer/CombatPanel/DefenderBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CombatPanel/DefenderBox"]
+layout_mode = 2
